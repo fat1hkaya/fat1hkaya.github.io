@@ -1,0 +1,1009 @@
+<!doctype html>
+<html lang="tr" data-lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fatih Kaya · SOC Analyst Portfolio</title>
+<meta name="description" content="Fatih Kaya — Computer Engineering student focused on SOC operations, detection engineering and SOAR automation. Splunk, Wazuh, Shuffle, pfSense, Active Directory.">
+<meta property="og:title" content="Fatih Kaya · SOC Analyst Portfolio">
+<meta property="og:description" content="Detection engineering & SOAR automation: from log to automated response.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://fat1hkaya.github.io/">
+<meta name="theme-color" content="#070b11">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23070b11'/%3E%3Cpath d='M32 10l18 7v13c0 11-7.5 19.5-18 24-10.5-4.5-18-13-18-24V17z' fill='none' stroke='%2334e3c9' stroke-width='4'/%3E%3Cpath d='M24 33l6 6 11-12' fill='none' stroke='%2334e3c9' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#070b11; --bg2:#0b111a; --panel:#0e1621; --panel2:#121c29; --line:#1c2a3b; --line2:#26384e;
+  --text:#e6edf5; --muted:#8a9bb0; --dim:#5b6b80;
+  --cyan:#34e3c9; --cyan-d:#1aa592; --blue:#5aa9ff; --amber:#ffbf47; --red:#ff5d6c; --green:#4be38a; --violet:#a78bfa;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --sans:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  --r:14px; --max:1180px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.6;overflow-x:hidden;overflow-x:clip}
+.bg-grid,.bg-glow{max-width:100vw}
+html[data-lang="tr"] [lang="en"], html[data-lang="en"] [lang="tr"]{display:none!important}
+a{color:inherit;text-decoration:none}
+::selection{background:rgba(52,227,201,.25)}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+.mono{font-family:var(--mono)}
+/* background grid + glow */
+.bg-grid{position:fixed;inset:0;z-index:-2;background-image:linear-gradient(rgba(90,169,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(90,169,255,.045) 1px,transparent 1px);background-size:44px 44px;mask-image:radial-gradient(ellipse at 50% 0%,#000 30%,transparent 75%)}
+.bg-glow{position:fixed;z-index:-1;max-width:none;width:900px;height:900px;border-radius:50%;filter:blur(120px);opacity:.18;pointer-events:none}
+.bg-glow.g1{background:var(--cyan);top:-450px;left:-200px}
+.bg-glow.g2{background:var(--blue);top:30%;right:-500px;opacity:.10}
+/* nav */
+nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:rgba(7,11,17,.72);border-bottom:1px solid transparent;transition:border-color .3s}
+nav.scrolled{border-color:var(--line)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:64px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-weight:700;font-size:15px}
+.brand .dot{width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 0 0 rgba(75,227,138,.6);animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(75,227,138,.55)}70%{box-shadow:0 0 0 10px rgba(75,227,138,0)}100%{box-shadow:0 0 0 0 rgba(75,227,138,0)}}
+.nav-links{display:flex;gap:4px;align-items:center}
+.nav-links a{font-size:14px;color:var(--muted);padding:8px 12px;border-radius:8px;transition:.2s}
+.nav-links a:hover,.nav-links a.active{color:var(--text);background:var(--panel)}
+.lang{display:flex;border:1px solid var(--line2);border-radius:9px;overflow:hidden;margin-left:10px;font-family:var(--mono);font-size:12px}
+.lang button{background:none;border:0;color:var(--muted);padding:7px 10px;cursor:pointer;font:inherit}
+.lang button.on{background:var(--cyan);color:#04110f;font-weight:700}
+.burger{display:none;background:none;border:1px solid var(--line2);color:var(--text);border-radius:9px;width:40px;height:38px;cursor:pointer;font-size:18px}
+/* hero */
+.hero{padding:72px 0 56px;display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+.tag{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12.5px;color:var(--cyan);border:1px solid rgba(52,227,201,.3);background:rgba(52,227,201,.06);padding:6px 12px;border-radius:999px}
+h1{font-size:clamp(40px,6vw,68px);line-height:1.02;letter-spacing:-.035em;font-weight:800;margin:20px 0 14px}
+h1 .grad{background:linear-gradient(100deg,var(--cyan),var(--blue) 60%,var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent}
+.role{font-family:var(--mono);font-size:clamp(15px,2vw,18px);color:var(--muted);min-height:28px}
+.role .typed{color:var(--text)}
+.cursor{display:inline-block;width:9px;height:1.1em;background:var(--cyan);vertical-align:-3px;margin-left:2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.lead{font-size:17px;color:var(--muted);max-width:560px;margin:20px 0 30px}
+.lead b{color:var(--text);font-weight:600}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:12px 18px;border-radius:11px;font-weight:600;font-size:14.5px;border:1px solid var(--line2);background:var(--panel);transition:transform .15s,border-color .2s,background .2s;cursor:pointer;color:var(--text);font-family:var(--sans)}
+.btn:hover{transform:translateY(-2px);border-color:var(--cyan-d)}
+.btn.primary{background:var(--cyan);color:#04110f;border-color:var(--cyan)}
+.btn.primary:hover{background:#5df0da}
+.btn svg{width:17px;height:17px}
+.socials{display:flex;gap:10px;margin-top:26px}
+.socials a{width:42px;height:42px;border-radius:11px;border:1px solid var(--line2);display:grid;place-items:center;color:var(--muted);transition:.2s;background:var(--panel)}
+.socials a:hover{color:var(--cyan);border-color:var(--cyan-d);transform:translateY(-2px)}
+.socials svg{width:19px;height:19px}
+/* SIEM panel */
+.siem{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line2);border-radius:18px;overflow:hidden;box-shadow:0 30px 80px -30px rgba(0,0,0,.8),0 0 0 1px rgba(52,227,201,.04)}
+.siem-top{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:12px;color:var(--muted)}
+.lights{display:flex;gap:7px}.lights i{width:11px;height:11px;border-radius:50%;background:#2a3646;display:block}
+.lights i:nth-child(1){background:#ff5f57}.lights i:nth-child(2){background:#febc2e}.lights i:nth-child(3){background:#28c840}
+.live{display:flex;align-items:center;gap:7px;color:var(--green)}
+.live::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--line)}
+.kpi{padding:14px 16px;border-right:1px solid var(--line)}
+.kpi:last-child{border-right:0}
+.kpi small{display:block;font-family:var(--mono);font-size:10.5px;color:var(--dim);text-transform:uppercase;letter-spacing:.08em}
+.kpi b{font-family:var(--mono);font-size:22px;font-weight:700}
+.kpi.k1 b{color:var(--text)}.kpi.k2 b{color:var(--amber)}.kpi.k3 b{color:var(--red)}
+.spark{height:44px;padding:8px 16px 0;border-bottom:1px solid var(--line)}
+.spark svg{width:100%;height:36px;display:block}
+.feed{height:258px;overflow:hidden;font-family:var(--mono);font-size:12px;padding:8px 0;position:relative}
+.feed::after{content:"";position:absolute;left:0;right:0;bottom:0;height:60px;background:linear-gradient(transparent,var(--panel))}
+.ev{display:grid;grid-template-columns:62px 58px minmax(0,1fr);gap:10px;padding:4px 16px;white-space:nowrap;align-items:center;animation:evin .4s ease-out}
+.ev>span:last-child{overflow:hidden;text-overflow:ellipsis;color:#b9c6d6}
+@keyframes evin{from{opacity:0;transform:translateY(-6px);background:rgba(52,227,201,.08)}to{opacity:1}}
+.ev .t{color:var(--dim)}
+.sev{font-weight:700;font-size:10.5px;padding:1px 0;text-align:center;border-radius:4px}
+.sev.lv-info{color:var(--blue);background:rgba(90,169,255,.1)}.sev.lv-low{color:var(--green);background:rgba(75,227,138,.1)}
+.sev.lv-med{color:var(--amber);background:rgba(255,191,71,.1)}.sev.lv-high{color:var(--red);background:rgba(255,93,108,.12)}
+.siem-foot{padding:9px 16px;border-top:1px solid var(--line);font-family:var(--mono);font-size:10.5px;color:var(--dim);display:flex;justify-content:space-between}
+/* sections */
+section{padding:96px 0;position:relative}
+.sec-head{margin-bottom:44px;max-width:760px}
+.eyebrow{font-family:var(--mono);font-size:13px;color:var(--cyan);letter-spacing:.04em;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:"";width:28px;height:1px;background:var(--cyan)}
+h2{font-size:clamp(30px,4vw,44px);letter-spacing:-.03em;line-height:1.1;font-weight:800}
+.sec-head p{color:var(--muted);font-size:17px;margin-top:14px}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease}
+.reveal.in{opacity:1;transform:none}
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:8px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:22px}
+.stat b{font-family:var(--mono);font-size:38px;font-weight:700;letter-spacing:-.03em;display:block;color:var(--text)}
+.stat b em{font-style:normal;color:var(--cyan)}
+.stat>span{color:var(--muted);font-size:14px}
+.about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:start}
+.about-text p{color:var(--muted);font-size:16.5px;margin-bottom:16px}
+.about-text p b{color:var(--text);font-weight:600}
+.focus{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:8px}
+.focus-item{display:flex;gap:14px;padding:14px;border-radius:10px;transition:background .2s}
+.focus-item:hover{background:var(--panel2)}
+.focus-ico{width:38px;height:38px;flex:none;border-radius:10px;display:grid;place-items:center;background:rgba(52,227,201,.08);color:var(--cyan);border:1px solid rgba(52,227,201,.2)}
+.focus-ico svg{width:19px;height:19px}
+.focus-item h4{font-size:15px;font-weight:600}
+.focus-item p{font-size:13.5px;color:var(--muted)}
+/* lab */
+.lab{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.lab-top{display:grid;grid-template-columns:1fr 330px;gap:20px}
+.diagram{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px;position:relative}
+.diagram-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:10px;flex-wrap:wrap}
+.diagram-head .mono{font-size:12px;color:var(--muted)}
+#topo{width:100%;height:auto;display:block}
+.node{cursor:pointer}
+.node rect{transition:stroke .2s,fill .2s}
+.node:hover rect.box,.node.sel rect.box{stroke:var(--cyan);fill:#13232c}
+.node text{pointer-events:none}
+.flow{fill:none;stroke:#2a3d55;stroke-width:1.6}
+.flow.dash{stroke-dasharray:4 5}
+.flow.hot{stroke:var(--cyan);stroke-width:2.2;filter:drop-shadow(0 0 4px rgba(52,227,201,.7))}
+.flow.atk{stroke:var(--red);stroke-width:2.2;filter:drop-shadow(0 0 4px rgba(255,93,108,.7))}
+.pkt{opacity:0}
+.info{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px;display:flex;flex-direction:column}
+.info h3{font-size:18px;margin:6px 0 4px}
+.info .ip{font-family:var(--mono);font-size:12px;color:var(--cyan)}
+.info p{color:var(--muted);font-size:14px;margin:10px 0}
+.info ul{list-style:none;font-size:13.5px;color:#c3cfdd}
+.info li{padding:6px 0;border-top:1px dashed var(--line);display:flex;gap:8px}
+.info li::before{content:"›";color:var(--cyan);font-family:var(--mono)}
+.chain{margin-top:20px;display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.step{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;position:relative;transition:.3s}
+.step .n{font-family:var(--mono);font-size:11px;color:var(--dim)}
+.step h4{font-size:14px;margin:4px 0}
+.step p{font-size:12.5px;color:var(--muted)}
+.step.on{border-color:var(--cyan);background:#0f1f26;box-shadow:0 0 0 1px rgba(52,227,201,.2),0 10px 30px -10px rgba(52,227,201,.25)}
+.step.done{border-color:#1d4a45}
+.step.done .n{color:var(--cyan)}
+.replay-log{margin-top:14px;background:#05080c;border:1px solid var(--line);border-radius:12px;font-family:var(--mono);font-size:12px;padding:12px 14px;height:132px;overflow:auto;color:#b6c3d3}
+.replay-log .l{white-space:pre-wrap}
+.c-red{color:var(--red)}.c-cyan{color:var(--cyan)}.c-amber{color:var(--amber)}.c-green{color:var(--green)}.c-dim{color:var(--dim)}.c-blue{color:var(--blue)}.c-violet{color:var(--violet)}
+/* case tabs */
+.cases{margin-top:56px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.tab{background:var(--panel);border:1px solid var(--line);color:var(--muted);padding:10px 16px;border-radius:10px;cursor:pointer;font-family:var(--sans);font-size:14px;font-weight:600;transition:.2s;display:flex;gap:9px;align-items:center}
+.tab .mitre{font-family:var(--mono);font-size:11px;padding:2px 7px;border-radius:5px;background:var(--panel2);color:var(--dim)}
+.tab.on{color:var(--text);border-color:var(--cyan-d);background:#0f1f26}
+.tab.on .mitre{color:var(--cyan);background:rgba(52,227,201,.1)}
+.case{display:none;grid-template-columns:1.15fr .85fr;gap:16px}
+.case.on{display:grid;animation:fade .4s}
+.case>*,.lab-top>*,.about-grid>*,.contact>*,.hero>*{min-width:0}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:20px}
+.card h4{font-size:13px;font-family:var(--mono);color:var(--dim);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;font-weight:500}
+.code{background:#05080c;border:1px solid var(--line);border-radius:10px;padding:14px 16px;font-family:var(--mono);font-size:12.5px;line-height:1.75;overflow-x:auto;color:#cdd8e5;white-space:pre}
+.code .k{color:var(--violet)}.code .f{color:var(--blue)}.code .s{color:var(--green)}.code .c{color:var(--dim)}.code .o{color:var(--amber)}
+.attack-cmd{margin-bottom:14px}
+.attack-cmd .code{border-color:rgba(255,93,108,.25)}
+.kv{display:grid;gap:12px}
+.kv div{font-size:14px;color:var(--muted)}
+.kv b{color:var(--text);display:block;font-size:14.5px;margin-bottom:2px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11.5px;padding:3px 9px;border-radius:6px;border:1px solid var(--line2);color:var(--muted);margin:2px 4px 2px 0}
+.pill.red{color:var(--red);border-color:rgba(255,93,108,.35);background:rgba(255,93,108,.06)}
+.pill.cyan{color:var(--cyan);border-color:rgba(52,227,201,.35);background:rgba(52,227,201,.06)}
+.challenge{margin-top:14px;border-left:3px solid var(--amber);background:rgba(255,191,71,.05);padding:12px 14px;border-radius:0 10px 10px 0;font-size:13.5px;color:#d7c79d}
+.challenge b{color:var(--amber);font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;display:block;margin-bottom:4px}
+.lab-cta{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
+/* telegram mock */
+.tg{background:#0d1620;border:1px solid var(--line);border-radius:12px;padding:12px;font-size:12.5px;margin-top:14px}
+.tg-h{display:flex;align-items:center;gap:8px;font-weight:600;font-size:13px;margin-bottom:8px}
+.tg-av{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#e46b8b,#b04fd1);display:grid;place-items:center;font-size:12px;font-weight:700}
+.tg-msg{background:#182533;border-radius:10px;padding:10px 12px;line-height:1.55;color:#dfe8f1}
+.tg-msg .ip{color:#7ab8ff}
+/* skills */
+.skills{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.skill{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:22px;transition:border-color .25s,transform .25s}
+.skill:hover{border-color:var(--line2);transform:translateY(-3px)}
+.skill-h{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.skill-h h3{font-size:16px}
+.bars{display:grid;gap:11px}
+.bar{font-size:13px}
+.bar-top{display:flex;justify-content:space-between;color:#c4d0de;margin-bottom:5px}
+.bar-top span:last-child{font-family:var(--mono);font-size:11px;color:var(--dim)}
+.track{height:5px;background:var(--panel2);border-radius:5px;overflow:hidden}
+.fill{height:100%;width:0;background:linear-gradient(90deg,var(--cyan-d),var(--cyan));border-radius:5px;transition:width 1.4s cubic-bezier(.2,.8,.2,1)}
+.mitre-wrap{margin-top:22px}
+.matrix{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px}
+.mt{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:12.5px}
+.mt b{font-family:var(--mono);font-size:11px;color:var(--cyan);display:block}
+.mt span{color:#c4d0de}
+.mt small{display:block;color:var(--dim);font-family:var(--mono);font-size:10.5px;margin-top:3px}
+.mt.detect{border-color:rgba(52,227,201,.4);background:linear-gradient(180deg,rgba(52,227,201,.06),transparent)}
+/* timeline */
+.timeline{position:relative;padding-left:30px}
+.timeline::before{content:"";position:absolute;left:7px;top:6px;bottom:6px;width:2px;background:linear-gradient(var(--cyan),var(--line) 70%)}
+.tl{position:relative;margin-bottom:22px}
+.tl::before{content:"";position:absolute;left:-29px;top:22px;width:14px;height:14px;border-radius:50%;background:var(--bg);border:2px solid var(--cyan)}
+.tl.now::before{background:var(--cyan);box-shadow:0 0 0 5px rgba(52,227,201,.15)}
+.tl .card{padding:22px}
+.tl-top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline}
+.tl h3{font-size:18px}
+.tl .org{color:var(--cyan);font-size:14.5px;font-weight:600}
+.tl .date{font-family:var(--mono);font-size:12.5px;color:var(--dim)}
+.tl p{color:var(--muted);font-size:14.5px;margin-top:10px}
+.tl ul{margin-top:10px;padding-left:18px;color:#c4d0de;font-size:14px}
+.tl li{margin:5px 0}
+.tl li::marker{color:var(--cyan)}
+.learn{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}
+.learn .card{padding:16px}
+.learn b{font-size:14.5px;display:block}
+.learn span{font-size:12.5px;color:var(--muted)}
+.learn .st{font-family:var(--mono);font-size:10.5px;margin-top:8px;display:inline-block;padding:2px 7px;border-radius:5px}
+.st.ok{color:var(--green);background:rgba(75,227,138,.1)}.st.go{color:var(--amber);background:rgba(255,191,71,.1)}
+/* projects */
+.projects{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.proj{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:22px;display:flex;flex-direction:column;transition:border-color .25s,transform .25s;position:relative;overflow:hidden}
+.proj::before{content:"";position:absolute;inset:0;background:radial-gradient(400px circle at var(--mx,50%) var(--my,0%),rgba(52,227,201,.08),transparent 40%);opacity:0;transition:opacity .3s;pointer-events:none}
+.proj:hover::before{opacity:1}
+.proj:hover{border-color:var(--line2);transform:translateY(-3px)}
+.proj.feat{grid-column:span 2;background:linear-gradient(135deg,#0f1f26,var(--panel) 60%);border-color:#1d4a45}
+.proj-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.proj-cat{font-family:var(--mono);font-size:11px;color:var(--cyan);text-transform:uppercase;letter-spacing:.08em}
+.proj h3{font-size:18px;margin-bottom:8px;letter-spacing:-.01em}
+.proj p{color:var(--muted);font-size:14px;flex:1}
+.proj .tags{margin-top:14px}
+.proj .go{margin-top:16px;font-size:13.5px;font-weight:600;color:var(--cyan);display:inline-flex;gap:6px;align-items:center}
+.proj .go:hover{gap:10px}
+.ext{color:var(--dim);width:18px;height:18px}
+/* terminal */
+.term{background:#05080c;border:1px solid var(--line2);border-radius:16px;overflow:hidden;box-shadow:0 30px 80px -40px rgba(0,0,0,.9)}
+.term-body{height:380px;overflow:auto;padding:16px 18px;font-family:var(--mono);font-size:13.5px;line-height:1.7;cursor:text}
+.term-body .out{white-space:pre-wrap;color:#b9c6d6}
+.prompt{color:var(--green)}.prompt i{color:var(--blue);font-style:normal}
+.term-line{display:flex;gap:8px}
+#tin{flex:1;background:none;border:0;outline:0;color:var(--text);font:inherit;caret-color:var(--cyan)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.chip{font-family:var(--mono);font-size:12px;padding:6px 11px;border-radius:8px;border:1px solid var(--line2);background:var(--panel);color:var(--muted);cursor:pointer;transition:.2s}
+.chip:hover{color:var(--cyan);border-color:var(--cyan-d)}
+/* contact */
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:stretch}
+.contact-main{background:linear-gradient(135deg,#0f1f26,var(--panel));border:1px solid #1d4a45;border-radius:18px;padding:34px}
+.contact-main h2{font-size:clamp(28px,3.4vw,38px)}
+.contact-main p{color:var(--muted);margin:14px 0 24px}
+.links{display:grid;gap:10px}
+.lnk{display:flex;align-items:center;gap:14px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;transition:.2s}
+.lnk:hover{border-color:var(--cyan-d);transform:translateX(4px)}
+.lnk svg{width:20px;height:20px;color:var(--cyan);flex:none}
+.lnk b{display:block;font-size:14.5px}
+.lnk span{font-size:12.5px;color:var(--muted);font-family:var(--mono)}
+.lnk .arrow{margin-left:auto;color:var(--dim)}
+footer{border-top:1px solid var(--line);padding:30px 0;color:var(--dim);font-size:13px;font-family:var(--mono)}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--panel2);border:1px solid var(--cyan-d);color:var(--text);padding:10px 16px;border-radius:10px;font-size:13.5px;opacity:0;transition:.3s;z-index:100;font-family:var(--mono)}
+.toast.show{opacity:1;transform:translateX(-50%)}
+.hidden{display:none!important}
+/* responsive */
+@media (max-width:1000px){
+  .hero{grid-template-columns:1fr;padding-top:48px}
+  .lab-top{grid-template-columns:1fr}
+  .case.on{grid-template-columns:minmax(0,1fr)}
+  .skills,.projects{grid-template-columns:1fr 1fr}
+  .proj.feat{grid-column:span 2}
+  .about-grid,.contact{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .learn{grid-template-columns:repeat(2,1fr)}
+  .chain{grid-template-columns:repeat(5,minmax(150px,1fr));overflow-x:auto;padding-bottom:6px}
+}
+@media (max-width:720px){
+  .wrap{padding:0 16px}
+  .nav-links{position:fixed;top:64px;left:0;right:0;flex-direction:column;align-items:stretch;background:rgba(7,11,17,.97);border-bottom:1px solid var(--line);padding:10px 16px 16px;display:none}
+  .nav-links.open{display:flex}
+  .nav-links a{padding:12px}
+  .lang{margin:8px 0 0;align-self:flex-start}
+  .burger{display:block}
+  section{padding:72px 0}
+  .skills,.projects{grid-template-columns:1fr}
+  .proj.feat{grid-column:auto}
+  .kpi b{font-size:18px}
+  .ev{grid-template-columns:58px 50px 1fr;font-size:11px}
+  .stat b{font-size:30px}
+  .learn{grid-template-columns:1fr}
+  .term-body{height:340px;font-size:12.5px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<div class="bg-grid"></div><div class="bg-glow g1"></div><div class="bg-glow g2"></div>
+
+<!-- SVG icon sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-gh" viewBox="0 0 24 24"><path fill="currentColor" d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.2c0 .3.2.7.8.6A11.5 11.5 0 0 0 23.5 12C23.5 5.7 18.3.5 12 .5z"/></symbol>
+  <symbol id="i-in" viewBox="0 0 24 24"><path fill="currentColor" d="M20.4 20.5h-3.6v-5.6c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9v5.7H9.3V9h3.4v1.6c.5-.9 1.6-1.8 3.4-1.8 3.6 0 4.3 2.4 4.3 5.5v6.2zM5.3 7.4a2.1 2.1 0 1 1 0-4.2 2.1 2.1 0 0 1 0 4.2zM7.1 20.5H3.5V9h3.6v11.5zM22.2 0H1.8C.8 0 0 .8 0 1.7v20.6c0 .9.8 1.7 1.8 1.7h20.4c1 0 1.8-.8 1.8-1.7V1.7C24 .8 23.2 0 22.2 0z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm18 2-10 7L2 6"/></symbol>
+  <symbol id="i-flag" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 22V4m0 0s1.5-1 5-1 5 2 8 2 3-1 3-1v11s-1 1-3 1-5-2-8-2-5 1-5 1"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3zm-3 10 2 2 4-4"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm10 2-4.3-4.3"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></symbol>
+  <symbol id="i-net" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5v14M3 5h4v4H3zM17 5h4v4h-4zM3 15h4v4H3zM17 15h4v4h-4z"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></symbol>
+  <symbol id="i-dl" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 3v12m0 0-5-5m5 5 5-5M4 21h16"/></symbol>
+  <symbol id="i-ext" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M14 4h6v6M10 14 20 4M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path fill="currentColor" d="M7 4v16l13-8z"/></symbol>
+</svg>
+
+<nav id="nav">
+  <div class="wrap nav-in">
+    <a href="#top" class="brand"><span class="dot"></span>fatih@soc:~$</a>
+    <button class="burger" id="burger" aria-label="Menu">☰</button>
+    <div class="nav-links" id="navlinks">
+      <a href="#about"><span lang="tr">Hakkımda</span><span lang="en">About</span></a>
+      <a href="#lab">SOC Lab</a>
+      <a href="#skills"><span lang="tr">Yetkinlikler</span><span lang="en">Skills</span></a>
+      <a href="#experience"><span lang="tr">Deneyim</span><span lang="en">Experience</span></a>
+      <a href="#projects"><span lang="tr">Projeler</span><span lang="en">Projects</span></a>
+      <a href="#terminal">Terminal</a>
+      <a href="#contact"><span lang="tr">İletişim</span><span lang="en">Contact</span></a>
+      <div class="lang" role="group" aria-label="Language">
+        <button data-l="tr" class="on">TR</button><button data-l="en">EN</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<header id="top" class="wrap hero">
+  <div>
+    <span class="tag"><span class="mono">●</span>
+      <span lang="tr">SOC / Blue Team rollerine açığım</span><span lang="en">Open to SOC / Blue Team roles</span>
+    </span>
+    <h1>Fatih Kaya<br><span class="grad">Detection &amp; Response</span></h1>
+    <div class="role mono">&gt; <span class="typed" id="typed"></span><span class="cursor"></span></div>
+    <p class="lead">
+      <span lang="tr">Marmara Üniversitesi Bilgisayar Mühendisliği öğrencisiyim. Bir saldırının <b>logdan tespite, tespitten otomatik müdahaleye</b> uzanan yolunu kendi kurduğum SOC laboratuvarında uçtan uca inşa ettim. Splunk, Wazuh ve Shuffle SOAR ile çalışıyorum.</span>
+      <span lang="en">Computer Engineering student at Marmara University. I built an end-to-end SOC lab that takes an attack <b>from raw log to detection, and from detection to automated response</b>. I work with Splunk, Wazuh and Shuffle SOAR.</span>
+    </p>
+    <div class="cta">
+      <a href="#lab" class="btn primary"><svg><use href="#i-shield"/></svg><span lang="tr">SOC Lab'ı incele</span><span lang="en">Explore the SOC Lab</span></a>
+      <a href="#" class="btn hidden" id="cvBtn" download><svg><use href="#i-dl"/></svg><span lang="tr">CV indir</span><span lang="en">Download CV</span></a>
+      <a href="#contact" class="btn"><svg><use href="#i-mail"/></svg><span lang="tr">İletişime geç</span><span lang="en">Get in touch</span></a>
+    </div>
+    <div class="socials">
+      <a href="https://github.com/fat1hkaya" target="_blank" rel="noopener" aria-label="GitHub"><svg><use href="#i-gh"/></svg></a>
+      <a href="https://www.linkedin.com/in/fatihsec" target="_blank" rel="noopener" aria-label="LinkedIn"><svg><use href="#i-in"/></svg></a>
+      <a href="https://tryhackme.com/p/NullTraceX" target="_blank" rel="noopener" aria-label="TryHackMe"><svg><use href="#i-flag"/></svg></a>
+      <a href="#contact" class="mailto" aria-label="E-mail"><svg><use href="#i-mail"/></svg></a>
+    </div>
+  </div>
+
+  <div class="siem" aria-label="SIEM live feed simulation">
+    <div class="siem-top">
+      <div class="lights"><i></i><i></i><i></i></div>
+      <span>splunk · index=soc_lab</span>
+      <span class="live">LIVE</span>
+    </div>
+    <div class="kpis">
+      <div class="kpi k1"><small><span lang="tr">Olay</span><span lang="en">Events</span></small><b id="kEv">0</b></div>
+      <div class="kpi k2"><small><span lang="tr">Alarm</span><span lang="en">Alerts</span></small><b id="kAl">0</b></div>
+      <div class="kpi k3"><small><span lang="tr">Engellenen IP</span><span lang="en">Blocked IPs</span></small><b id="kBl">0</b></div>
+    </div>
+    <div class="spark"><svg viewBox="0 0 300 36" preserveAspectRatio="none"><path id="sparkPath" fill="none" stroke="#34e3c9" stroke-width="1.6"/><path id="sparkFill" fill="rgba(52,227,201,.08)"/></svg></div>
+    <div class="feed" id="feed"></div>
+    <div class="siem-foot"><span lang="tr">lab telemetrisinden üretilmiş simülasyon</span><span lang="en">simulation based on lab telemetry</span><span>soc.local</span></div>
+  </div>
+</header>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">01 · whoami</div>
+      <h2><span lang="tr">Alarm kapatmak değil, tespit mühendisliği.</span><span lang="en">Not just closing alerts: engineering detections.</span></h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p lang="tr">2026 yazında bir kamu bankasının <b>Güvenlik Operasyon Merkezi'nde</b> 36 iş günü staj yaptım. Windows ve Linux kimlik doğrulama loglarından firewall loglarına, MITRE ATT&amp;CK eşleştirmesinden tehdit avcılığı ve olay müdahalesine kadar bir SOC'un günlük akışını analistlerin yanında öğrendim.</p>
+        <p lang="en">In summer 2026 I completed a 36-working-day internship at the <b>Security Operations Center</b> of a public bank. Working alongside analysts, I learned the daily flow of a SOC: Windows and Linux authentication logs, firewall logs, MITRE ATT&amp;CK mapping, threat hunting and incident response.</p>
+        <p lang="tr">Kurumsal ortamda yönetici yetkim olmadığı için gözlemlediğim mimariyi <b>kendi ev laboratuvarımda sıfırdan kurdum</b>: pfSense ile segmentasyon, kasıtlı zafiyetli bir Active Directory, Sysmon ve Wazuh ile uç nokta görünürlüğü, Splunk'ta özel SPL tespitleri ve Shuffle ile otomatik IP engelleme.</p>
+        <p lang="en">Since I had no admin rights in the corporate environment, I <b>rebuilt the architecture from scratch in my home lab</b>: pfSense segmentation, a deliberately vulnerable Active Directory, Sysmon + Wazuh endpoint visibility, custom SPL detections in Splunk and automated IP blocking with Shuffle.</p>
+        <p lang="tr">Şu an TryHackMe SOC Level 1 yolunu ve Wazuh Blue Team eğitimini sürdürüyorum. Hedefim, L1/L2 SOC analisti olarak tespit kalitesini ve otomasyonu ölçülebilir şekilde iyileştirmek.</p>
+        <p lang="en">I'm currently progressing through the TryHackMe SOC Level 1 path and a Wazuh Blue Team training. My goal is to join a SOC as an L1/L2 analyst and measurably improve detection quality and automation.</p>
+      </div>
+      <div class="focus reveal">
+        <div class="focus-item"><div class="focus-ico"><svg><use href="#i-search"/></svg></div><div><h4>Detection Engineering</h4><p lang="tr">Davranışsal, imza tabanlı ve korelasyonlu SPL kuralları</p><p lang="en">Behavioral, signature-based and correlated SPL rules</p></div></div>
+        <div class="focus-item"><div class="focus-ico"><svg><use href="#i-bolt"/></svg></div><div><h4>SOAR Automation</h4><p lang="tr">Webhook → zenginleştirme → engelleme → bildirim</p><p lang="en">Webhook → enrichment → block → notify</p></div></div>
+        <div class="focus-item"><div class="focus-ico"><svg><use href="#i-shield"/></svg></div><div><h4>Endpoint &amp; AD Security</h4><p lang="tr">Sysmon, Wazuh, Windows Event ID'leri, Kerberos saldırıları</p><p lang="en">Sysmon, Wazuh, Windows Event IDs, Kerberos attacks</p></div></div>
+        <div class="focus-item"><div class="focus-ico"><svg><use href="#i-net"/></svg></div><div><h4>Network Defense</h4><p lang="tr">Segmentasyon, firewall kuralları, CCNA temeli</p><p lang="en">Segmentation, firewall rules, CCNA foundation</p></div></div>
+      </div>
+    </div>
+    <div class="stats reveal" style="margin-top:36px">
+      <div class="stat"><b data-count="36">0</b><span lang="tr">iş günü SOC stajı</span><span lang="en">working days in a SOC</span></div>
+      <div class="stat"><b><span data-count="3">0</span><em>/3</em></b><span lang="tr">senaryo otomatik engellendi</span><span lang="en">scenarios auto-blocked</span></div>
+      <div class="stat"><b data-count="7">0</b><span lang="tr">VM'lik izole lab</span><span lang="en">VMs in isolated lab</span></div>
+      <div class="stat"><b data-count="49">0</b><span lang="tr">sayfa Türkçe SPL rehberi</span><span lang="en">page Turkish SPL guide</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- LAB -->
+<section id="lab" class="lab">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">02 · featured case study</div>
+      <h2><span lang="tr">SOC Home Lab: tespitten otomatik müdahaleye</span><span lang="en">SOC Home Lab: from detection to automated response</span></h2>
+      <p lang="tr">VMware üzerinde 3 segmentli izole bir ağ. Bileşenlere tıklayarak rollerini görebilir, ardından saldırı zincirini canlı olarak oynatabilirsin.</p>
+      <p lang="en">An isolated 3-segment network on VMware. Click any component to see its role, then replay the full attack chain live.</p>
+    </div>
+
+    <div class="lab-top reveal">
+      <div class="diagram">
+        <div class="diagram-head">
+          <span class="mono">topology · soc.local</span>
+          <button class="btn primary" id="replayBtn" style="padding:9px 14px;font-size:13.5px"><svg><use href="#i-play"/></svg><span lang="tr">Saldırıyı oynat</span><span lang="en">Replay attack</span></button>
+        </div>
+        <svg id="topo" viewBox="0 0 760 440" role="img" aria-label="Lab topology">
+          <defs>
+            <marker id="ar" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L8 4L0 8z" fill="#2a3d55"/></marker>
+          </defs>
+          <!-- zones -->
+          <rect x="210" y="16" width="250" height="150" rx="12" fill="rgba(90,169,255,.04)" stroke="#1f3247" stroke-dasharray="5 5"/>
+          <text x="224" y="36" fill="#5aa9ff" font-family="JetBrains Mono, monospace" font-size="11">LAN · 192.168.10.0/24</text>
+          <rect x="210" y="188" width="536" height="238" rx="12" fill="rgba(52,227,201,.03)" stroke="#1d3a3a" stroke-dasharray="5 5"/>
+          <text x="224" y="208" fill="#34e3c9" font-family="JetBrains Mono, monospace" font-size="11">DMZ · 192.168.20.0/24</text>
+          <!-- flows -->
+          <path id="f-kali-pf" class="flow" d="M110 228 H140"/>
+          <path id="f-pf-dc" class="flow" d="M200 210 C215 150,215 90,234 82"/>
+          <path id="f-pf-w11" class="flow" d="M200 220 C220 170,300 150,345 140"/>
+          <path id="f-pf-ng" class="flow" d="M200 246 C215 330,230 350,240 352"/>
+          <path id="f-ng-js" class="flow" d="M330 352 H372"/>
+          <path id="f-js-sp" class="flow dash" d="M418 330 C440 290,470 280,500 270"/>
+          <path id="f-dc-sp" class="flow dash" d="M330 82 C470 90,540 160,548 238"/>
+          <path id="f-w11-sp" class="flow dash" d="M440 140 C520 150,560 200,564 238"/>
+          <path id="f-dc-wz" class="flow dash" d="M300 104 C320 180,330 230,336 246"/>
+          <path id="f-wz-sp" class="flow dash" d="M410 262 H496"/>
+          <path id="f-pf-sp" class="flow dash" d="M170 252 C190 430,470 420,540 302"/>
+          <path id="f-sp-sh" class="flow" d="M600 302 C620 330,640 340,646 352"/>
+          <path id="f-sh-pf" class="flow" d="M650 398 C560 440,240 440,176 256"/>
+          <path id="f-sh-tg" class="flow" d="M720 352 C740 300,740 120,712 102"/>
+          <!-- nodes -->
+          <g class="node" data-n="kali"><rect class="box" x="18" y="200" width="92" height="56" rx="10" fill="#1c1013" stroke="#5c2530"/><text x="64" y="224" text-anchor="middle" fill="#ff8b96" font-family="Inter, system-ui, sans-serif" font-weight="700" font-size="13">Kali</text><text x="64" y="242" text-anchor="middle" fill="#a35c66" font-family="JetBrains Mono, monospace" font-size="9.5">.32.185</text></g>
+          <g class="node" data-n="pf"><rect class="box" x="140" y="196" width="66" height="64" rx="10" fill="#0f1a24" stroke="#2a4a5c"/><text x="173" y="224" text-anchor="middle" fill="#e6edf5" font-family="Inter, system-ui, sans-serif" font-weight="700" font-size="12">pfSense</text><text x="173" y="242" text-anchor="middle" fill="#5b6b80" font-family="JetBrains Mono, monospace" font-size="9">FW / NAT</text></g>
+          <g class="node" data-n="dc"><rect class="box" x="234" y="56" width="96" height="54" rx="10" fill="#141a10" stroke="#4a4a22"/><text x="282" y="79" text-anchor="middle" fill="#ffd27a" font-family="Inter, system-ui, sans-serif" font-weight="700" font-size="12">AD DC</text><text x="282" y="96" text-anchor="middle" fill="#8a7a4a" font-family="JetBrains Mono, monospace" font-size="9.5">.10.10</text></g>
+          <g class="node" data-n="w11"><rect class="box" x="345" y="112" width="96" height="54" rx="10" fill="#141a10" stroke="#4a4a22"/><text x="393" y="135" text-anchor="middle" fill="#ffd27a" font-family="Inter, system-ui, sans-serif" font-weight="700" font-size="12">Windows 11</text><text x="393" y="152" text-anchor="middle" fill="#8a7a4a" font-family="JetBrains Mono, monospace" font-size="9.5">.10.20</text></g>
+          <g class="node" data-n="ng"><rect class="box" x="240" y="326" width="90" height="52" rx="10" fill="#0f1a24" stroke="#2a4a5c"/><text x="285" y="348" text-anchor="middle" fill="#e6edf5" font-family="Inter, system-ui, sans-serif" font-weight="700" font-size="12">Nginx</text><text x="285" y="365" text-anchor="middle" fill="#5b6b80" font-family="JetBrains Mono, monospace" font-size="9">reverse proxy</text></g>
+          <g class="node" data-n="js"><rect class="box" x="372" y="326" width="96" height="52" rx="10" fill="#0f1a24" stroke="#2a4a5c"/><text x="420" y="348" text-anchor="middle" fill="#e6edf5" font-family="Inter, system-ui, sans-serif" font-weight="700" font-size="12">Juice Shop</text><text x="420" y="365" text-anchor="middle" fill="#5b6b80" font-family="JetBrains Mono, monospace" font-size="9">.20.30:8080</text></g>
+          <g class="node" data-n="wz"><rect class="box" x="300" y="240" width="110" height="46" rx="10" fill="#1a140c" stroke="#5c4320"/><text x="355" y="260" text-anchor="middle" fill="#ffbf47" font-family="Inter, system-ui, sans-serif" font-weight="700" font-size="12">Wazuh</text><text x="355" y="276" text-anchor="middle" fill="#8a6a3a" font-family="JetBrains Mono, monospace" font-size="9.5">.20.10</text></g>
+          <g class="node" data-n="sp"><rect class="box" x="496" y="238" width="118" height="64" rx="10" fill="#0c1f1c" stroke="#1d5a50"/><text x="555" y="264" text-anchor="middle" fill="#34e3c9" font-family="Inter, system-ui, sans-serif" font-weight="800" font-size="13">Splunk SIEM</text><text x="555" y="282" text-anchor="middle" fill="#2a8a7c" font-family="JetBrains Mono, monospace" font-size="9.5">.20.20</text></g>
+          <g class="node" data-n="sh"><rect class="box" x="628" y="352" width="104" height="52" rx="10" fill="#120f1f" stroke="#3d3263"/><text x="680" y="374" text-anchor="middle" fill="#c4b5fd" font-family="Inter, system-ui, sans-serif" font-weight="700" font-size="12">Shuffle SOAR</text><text x="680" y="391" text-anchor="middle" fill="#6d5fa0" font-family="JetBrains Mono, monospace" font-size="9.5">.20.30</text></g>
+          <g class="node" data-n="tg"><rect class="box" x="640" y="58" width="96" height="50" rx="10" fill="#0d1a26" stroke="#24476a"/><text x="688" y="80" text-anchor="middle" fill="#7ab8ff" font-family="Inter, system-ui, sans-serif" font-weight="700" font-size="12">Telegram</text><text x="688" y="96" text-anchor="middle" fill="#3f6a96" font-family="JetBrains Mono, monospace" font-size="9">SOC analyst</text></g>
+          <circle id="pkt" class="pkt" r="5" fill="#ff5d6c"/>
+        </svg>
+      </div>
+      <aside class="info" id="info" aria-live="polite"></aside>
+    </div>
+
+    <div class="chain reveal" id="chain">
+      <div class="step" data-s="0"><div class="n">01 · RECON</div><h4 lang="tr">Saldırı</h4><h4 lang="en">Attack</h4><p lang="tr">Kali'den tarama, SQLi veya brute force</p><p lang="en">Scan, SQLi or brute force from Kali</p></div>
+      <div class="step" data-s="1"><div class="n">02 · LOG</div><h4 lang="tr">Toplama</h4><h4 lang="en">Collection</h4><p lang="tr">Nginx, Sysmon, Wazuh ve pfSense logları Splunk'a</p><p lang="en">Nginx, Sysmon, Wazuh, pfSense logs into Splunk</p></div>
+      <div class="step" data-s="2"><div class="n">03 · DETECT</div><h4 lang="tr">Tespit</h4><h4 lang="en">Detection</h4><p lang="tr">Zamanlanmış SPL alarmı tetiklenir</p><p lang="en">Scheduled SPL alert fires</p></div>
+      <div class="step" data-s="3"><div class="n">04 · RESPOND</div><h4 lang="tr">Müdahale</h4><h4 lang="en">Response</h4><p lang="tr">Shuffle, pfSense REST API ile IP'yi engeller</p><p lang="en">Shuffle blocks the IP via pfSense REST API</p></div>
+      <div class="step" data-s="4"><div class="n">05 · NOTIFY</div><h4 lang="tr">Bildirim</h4><h4 lang="en">Notify</h4><p lang="tr">MITRE etiketli Telegram mesajı</p><p lang="en">MITRE-tagged Telegram alert</p></div>
+    </div>
+    <div class="replay-log" id="rlog"><div class="l c-dim" lang="tr">// "Saldırıyı oynat" butonuna bas</div><div class="l c-dim" lang="en">// press "Replay attack"</div></div>
+
+    <!-- cases -->
+    <div class="cases reveal">
+      <div class="tabs" role="tablist">
+        <button class="tab on" data-c="c1">Directory Scanning <span class="mitre">T1595.003</span></button>
+        <button class="tab" data-c="c2">SQL Injection <span class="mitre">T1190</span></button>
+        <button class="tab" data-c="c3">RDP Brute Force <span class="mitre">T1110</span></button>
+      </div>
+
+      <div class="case on" id="c1">
+        <div class="card">
+          <div class="attack-cmd"><h4><span lang="tr">Saldırı</span><span lang="en">Attack</span></h4>
+<div class="code"><span class="c">┌──(nulltracex㉿kali)-[~]</span>
+<span class="o">$</span> gobuster dir -u http://192.168.20.30:8080 \
+    -w /usr/share/wordlists/dirb/common.txt --exclude-length 9393 -t 10</div></div>
+          <h4><span lang="tr">Tespit · SPL</span><span lang="en">Detection · SPL</span></h4>
+<div class="code"><span class="k">index</span>=juiceshop <span class="k">sourcetype</span>=access_combined
+| <span class="f">where</span> NOT <span class="f">match</span>(uri, <span class="s">"\.(jpg|jpeg|png|svg|css|js|ico|woff2?|gif|map)$"</span>)
+| <span class="f">where</span> NOT <span class="f">match</span>(uri, <span class="s">"^/socket\.io"</span>)
+| <span class="f">where</span> NOT <span class="f">match</span>(uri, <span class="s">"^/rest/user/whoami"</span>)
+| <span class="f">bin</span> _time span=<span class="o">10s</span>
+| <span class="f">stats</span> count <span class="f">dc</span>(uri) <span class="k">as</span> unique_uris <span class="k">by</span> clientip, _time
+| <span class="f">where</span> count > <span class="o">10</span> AND unique_uris > <span class="o">8</span></div>
+        </div>
+        <div class="card kv">
+          <div><b lang="tr">Yaklaşım: davranışsal</b><b lang="en">Approach: behavioral</b><span lang="tr">Normal kullanıcı aynı sayfaları tekrar ister; tarama aracı kısa sürede çok sayıda <i>farklı</i> endpoint dener. Metrik <code class="mono">count</code> değil <code class="mono">dc(uri)</code>.</span><span lang="en">Normal users revisit the same pages; scanners hit many <i>different</i> endpoints fast. The metric is <code class="mono">dc(uri)</code>, not <code class="mono">count</code>.</span></div>
+          <div><b lang="tr">Sonuç</b><b lang="en">Result</b><span lang="tr">10 saniyelik pencerede <b style="display:inline;color:var(--cyan)">1034</b> farklı URI → alarm → IP engellendi</span><span lang="en"><b style="display:inline;color:var(--cyan)">1034</b> unique URIs in a 10-second window → alert → IP blocked</span></div>
+          <div><span class="pill red">TA0043 Reconnaissance</span><span class="pill cyan">T1595.003</span></div>
+          <div class="challenge"><b>CHALLENGE</b><span lang="tr">Juice Shop bir SPA; bilinmeyen her URL'ye 200 dönüyor. gobuster'da <code class="mono">--exclude-length</code>, Splunk'ta statik asset filtresiyle false positive'ler giderildi.</span><span lang="en">Juice Shop is an SPA and returns 200 for every unknown URL. Solved with <code class="mono">--exclude-length</code> in gobuster and a static-asset filter in SPL to remove false positives.</span></div>
+        </div>
+      </div>
+
+      <div class="case" id="c2">
+        <div class="card">
+          <div class="attack-cmd"><h4><span lang="tr">Saldırı</span><span lang="en">Attack</span></h4>
+<div class="code"><span class="o">$</span> curl -s -X POST http://192.168.20.30:8080/rest/user/login \
+    -H <span class="s">"Content-Type: application/json"</span> \
+    -d <span class="s">'{"email":"'"'"' OR 1=1 --","password":"x"}'</span>
+<span class="c"># → admin JWT token returned</span></div></div>
+          <h4><span lang="tr">Tespit · SPL</span><span lang="en">Detection · SPL</span></h4>
+<div class="code"><span class="k">index</span>=juiceshop <span class="k">sourcetype</span>=access_combined uri=<span class="s">"/rest/user/login"</span>
+| <span class="f">rex</span> field=_raw <span class="s">"body=\"(?&lt;request_body&gt;[^\"]*)\""</span>
+| <span class="f">regex</span> request_body=<span class="s">"(?i)('|--|\bOR\b\s+\d+\s*=\s*\d+|\bUNION\b.*\bSELECT\b)"</span>
+| <span class="f">table</span> _time, clientip, request_body, status</div>
+        </div>
+        <div class="card kv">
+          <div><b lang="tr">Yaklaşım: imza tabanlı</b><b lang="en">Approach: signature-based</b><span lang="tr">Payload URL'de değil POST gövdesinde. Nginx <code class="mono">log_format</code>'a <code class="mono">$request_body</code> eklendi, Splunk'ta <code class="mono">rex</code> ile ayrıştırıldı.</span><span lang="en">The payload lives in the POST body, not the URL. Added <code class="mono">$request_body</code> to the Nginx <code class="mono">log_format</code> and parsed it with <code class="mono">rex</code>.</span></div>
+          <div class="tg"><div class="tg-h"><div class="tg-av">S</div>Soc_Alert_Bot</div><div class="tg-msg">🟠 SOC ALERT<br>Alert: JuiceShop - SQL Injection Login Attempt Detected<br>Kaynak: <span class="ip">192.168.32.185</span><br>MITRE: T1190 - Exploit Public-Facing Application<br><br>🛡️ Otomatik Engelleme: <span class="ip">192.168.32.185</span> pfSense üzerinden bloklanacak</div></div>
+          <div class="challenge"><b>CHALLENGE</b><span lang="tr">Otomatik oluşturulan pfSense kuralı listenin altına düşüp hiç eşleşmiyordu (ilk eşleşen kazanır). Çözüm: en üstte sabit tek bir kuralı REST API ile PATCH etmek.</span><span lang="en">Auto-created pfSense rules landed at the bottom and never matched (first match wins). Fix: a single pinned top rule updated via REST API PATCH.</span></div>
+        </div>
+      </div>
+
+      <div class="case" id="c3">
+        <div class="card">
+          <div class="attack-cmd"><h4><span lang="tr">Saldırı</span><span lang="en">Attack</span></h4>
+<div class="code"><span class="o">$</span> hydra -l Administrator -P /usr/share/wordlists/rockyou.txt \
+    rdp://192.168.10.10
+<span class="c"># [3389][rdp] 1 valid password found</span></div></div>
+          <h4><span lang="tr">Tespit · SPL (eşik + korelasyon)</span><span lang="en">Detection · SPL (threshold + correlation)</span></h4>
+<div class="code"><span class="k">index</span>=wineventlog EventCode=<span class="o">4625</span>
+| <span class="f">bin</span> _time span=<span class="o">5m</span>
+| <span class="f">stats</span> count <span class="k">by</span> TargetUserName, IpAddress, _time
+| <span class="f">where</span> count > <span class="o">5</span>
+
+<span class="c">``` did a 4624 follow the failures? ```</span>
+<span class="k">index</span>=wineventlog (EventCode=<span class="o">4625</span> OR EventCode=<span class="o">4624</span>)
+| <span class="f">where</span> TargetUserName=<span class="s">"Administrator"</span>
+| <span class="f">table</span> _time, EventCode, TargetUserName, IpAddress</div>
+        </div>
+        <div class="card kv">
+          <div><b lang="tr">Yaklaşım: hacim + sonuç</b><b lang="en">Approach: volume + outcome</b><span lang="tr">Eşik aşımı tek başına yetmez. 4625'lerin ardından gelen 4624, "deneme" ile <b style="display:inline;color:var(--red)">gerçek ihlali</b> ayırır.</span><span lang="en">A threshold alone isn't enough. A 4624 following the 4625s separates an "attempt" from a <b style="display:inline;color:var(--red)">real compromise</b>.</span></div>
+          <div><b lang="tr">Sonuç</b><b lang="en">Result</b><span lang="tr">5 dakikada <b style="display:inline;color:var(--cyan)">78</b> başarısız deneme + başarılı oturum → engelleme</span><span lang="en"><b style="display:inline;color:var(--cyan)">78</b> failures in 5 minutes + a successful logon → block</span></div>
+          <div><span class="pill red">TA0006 Credential Access</span><span class="pill cyan">T1110</span></div>
+          <div class="challenge"><b>CHALLENGE</b><span lang="tr">Windows <code class="mono">IpAddress</code> alanını <code class="mono">::ffff:x.x.x.x</code> (IPv4-mapped IPv6) formatında yazıyordu; Shuffle'da regex'ten önce önek temizlendi.</span><span lang="en">Windows wrote <code class="mono">IpAddress</code> as <code class="mono">::ffff:x.x.x.x</code> (IPv4-mapped IPv6); the prefix is stripped in Shuffle before validation.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lab-cta reveal">
+      <a class="btn primary" href="https://github.com/fat1hkaya/soc-home-lab" target="_blank" rel="noopener"><svg><use href="#i-gh"/></svg><span lang="tr">Repoda tam dokümantasyon</span><span lang="en">Full docs on GitHub</span></a>
+      <a class="btn" href="https://github.com/fat1hkaya/soc-home-lab/blob/main/docs/07-lessons-learned.md" target="_blank" rel="noopener"><span lang="tr">12 sorun, 12 çözüm</span><span lang="en">12 problems, 12 fixes</span><svg class="ext"><use href="#i-ext"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">03 · stack</div>
+      <h2><span lang="tr">Elimin değdiği araçlar</span><span lang="en">Tools I've actually used</span></h2>
+      <p lang="tr">Seviyeler kendi değerlendirmem; her biri lab'da kurup kullandığım ya da staj boyunca çalıştığım araçlar.</p>
+      <p lang="en">Levels are self-assessed; each tool is something I deployed in the lab or worked with during my internship.</p>
+    </div>
+    <div class="skills">
+      <div class="skill reveal"><div class="skill-h"><div class="focus-ico"><svg><use href="#i-search"/></svg></div><h3>SIEM &amp; Detection</h3></div>
+        <div class="bars">
+          <div class="bar"><div class="bar-top"><span>Splunk / SPL</span><span>advanced</span></div><div class="track"><div class="fill" data-w="85"></div></div></div>
+          <div class="bar"><div class="bar-top"><span>Wazuh</span><span>intermediate</span></div><div class="track"><div class="fill" data-w="70"></div></div></div>
+          <div class="bar"><div class="bar-top"><span>Sysmon</span><span>intermediate</span></div><div class="track"><div class="fill" data-w="68"></div></div></div>
+          <div class="bar"><div class="bar-top"><span>MITRE ATT&amp;CK</span><span>intermediate</span></div><div class="track"><div class="fill" data-w="72"></div></div></div>
+        </div></div>
+      <div class="skill reveal"><div class="skill-h"><div class="focus-ico"><svg><use href="#i-bolt"/></svg></div><h3>SOAR &amp; Automation</h3></div>
+        <div class="bars">
+          <div class="bar"><div class="bar-top"><span>Shuffle SOAR</span><span>intermediate</span></div><div class="track"><div class="fill" data-w="72"></div></div></div>
+          <div class="bar"><div class="bar-top"><span>Python</span><span>intermediate</span></div><div class="track"><div class="fill" data-w="68"></div></div></div>
+          <div class="bar"><div class="bar-top"><span>REST APIs / Webhooks</span><span>intermediate</span></div><div class="track"><div class="fill" data-w="66"></div></div></div>
+          <div class="bar"><div class="bar-top"><span>Docker</span><span>basic</span></div><div class="track"><div class="fill" data-w="50"></div></div></div>
+        </div></div>
+      <div class="skill reveal"><div class="skill-h"><div class="focus-ico"><svg><use href="#i-net"/></svg></div><h3>Infrastructure</h3></div>
+        <div class="bars">
+          <div class="bar"><div class="bar-top"><span>pfSense / Firewalling</span><span>intermediate</span></div><div class="track"><div class="fill" data-w="70"></div></div></div>
+          <div class="bar"><div class="bar-top"><span>Active Directory</span><span>intermediate</span></div><div class="track"><div class="fill" data-w="62"></div></div></div>
+          <div class="bar"><div class="bar-top"><span>Networking (CCNA)</span><span>intermediate</span></div><div class="track"><div class="fill" data-w="70"></div></div></div>
+          <div class="bar"><div class="bar-top"><span>Linux</span><span>intermediate</span></div><div class="track"><div class="fill" data-w="62"></div></div></div>
+        </div></div>
+    </div>
+
+    <div class="mitre-wrap reveal">
+      <div class="eyebrow" style="margin-top:34px"><span lang="tr">lab'da üretilen veya tespit edilen teknikler</span><span lang="en">techniques emulated or detected in the lab</span></div>
+      <div class="matrix">
+        <div class="mt detect"><b>T1595.003</b><span>Wordlist Scanning</span><small>detected · auto-blocked</small></div>
+        <div class="mt detect"><b>T1190</b><span>Exploit Public-Facing App</span><small>detected · auto-blocked</small></div>
+        <div class="mt detect"><b>T1110</b><span>Brute Force</span><small>detected · auto-blocked</small></div>
+        <div class="mt"><b>T1558.003</b><span>Kerberoasting</span><small>lab prepared · SPN account</small></div>
+        <div class="mt"><b>T1558.004</b><span>AS-REP Roasting</span><small>lab prepared</small></div>
+        <div class="mt"><b>T1003.001</b><span>LSASS Memory</span><small>Sysmon EID 10 logging</small></div>
+        <div class="mt"><b>T1071.004</b><span>DNS C2 / Tunneling</span><small>Sysmon EID 22 + DNS logs</small></div>
+        <div class="mt"><b>T1059.001</b><span>PowerShell</span><small>Script Block Logging 4104</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" style="background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">04 · timeline</div>
+      <h2><span lang="tr">Deneyim ve eğitim</span><span lang="en">Experience &amp; education</span></h2>
+    </div>
+    <div class="timeline">
+      <div class="tl now reveal"><div class="card">
+        <div class="tl-top"><div><h3><span lang="tr">Sürekli öğrenme</span><span lang="en">Continuous learning</span></h3><div class="org">TryHackMe · CyberCarier</div></div><span class="date">2026 — <span lang="tr">devam ediyor</span><span lang="en">present</span></span></div>
+        <ul>
+          <li lang="tr">TryHackMe <b>SOC Level 1</b> yolu: Blue Team Intro, SOC Team Internals, Phishing Analysis, Core SOC Solutions, Cyber Defence Frameworks modülleri tamamlandı</li>
+          <li lang="en">TryHackMe <b>SOC Level 1</b> path: completed Blue Team Intro, SOC Team Internals, Phishing Analysis, Core SOC Solutions and Cyber Defence Frameworks</li>
+          <li lang="tr">CyberCarier-3 <b>Wazuh Blue Team</b> eğitimi (canlı dersler, Ekim 2026'dan itibaren)</li>
+          <li lang="en">CyberCarier-3 <b>Wazuh Blue Team</b> training (live sessions, since October 2026)</li>
+        </ul>
+      </div></div>
+      <div class="tl reveal"><div class="card">
+        <div class="tl-top"><div><h3><span lang="tr">SOC Stajyeri</span><span lang="en">SOC Intern</span></h3><div class="org">VakıfBank · <span lang="tr">Bilgi Güvenliği Müdürlüğü, Güvenlik Operasyon Merkezi</span><span lang="en">Information Security Directorate, Security Operations Center</span></div></div><span class="date">07.2026 — 08.2026</span></div>
+        <ul>
+          <li lang="tr">Windows (4624/4625, Kerberos 4768/4769, 4662) ve Linux (auth.log, sudo, PAM) kimlik doğrulama loglarının triyajı ve zaman çizelgesi analizi</li>
+          <li lang="en">Triage and timeline analysis of Windows (4624/4625, Kerberos 4768/4769, 4662) and Linux (auth.log, sudo, PAM) authentication logs</li>
+          <li lang="tr">MITRE ATT&amp;CK eşleştirmesi, detection engineering, threat hunting ve olay müdahalesi süreçleri; IOC doğrulama ve tehdit istihbaratı döngüsü</li>
+          <li lang="en">MITRE ATT&amp;CK mapping, detection engineering, threat hunting and incident response; IOC validation and the intelligence cycle</li>
+          <li lang="tr">SOC ekipleri için <b>49 sayfalık Türkçe SPL rehberi</b> ve PDF tehdit raporlarından IOC çıkaran bir Python aracı hazırladım</li>
+          <li lang="en">Wrote a <b>49-page Turkish SPL guide</b> for SOC teams and a Python tool that extracts IOCs from PDF threat reports</li>
+          <li lang="tr">Staj kapanışında uçtan uca SOC lab mimarimi danışmanlarıma sundum</li>
+          <li lang="en">Presented my end-to-end SOC lab architecture to my mentors at the end of the internship</li>
+        </ul>
+      </div></div>
+      <div class="tl reveal"><div class="card">
+        <div class="tl-top"><div><h3><span lang="tr">Bilgisayar Mühendisliği (Lisans)</span><span lang="en">B.Sc. Computer Engineering</span></h3><div class="org"><span lang="tr">Marmara Üniversitesi · Teknoloji Fakültesi</span><span lang="en">Marmara University · Faculty of Technology</span></div></div><span class="date">İstanbul</span></div>
+        <p lang="tr">İşletim sistemleri, veri tabanı yönetim sistemleri, mikrodenetleyiciler, sinyaller ve sistemler, yapay sinir ağları. Proje: OSPF, HSRP, EtherChannel ve güvenlik özellikleriyle iki kampüslü ağ tasarımı.</p>
+        <p lang="en">Operating systems, database management systems, microcontrollers, signals &amp; systems, neural networks. Project: a two-campus network design with OSPF, HSRP, EtherChannel and Layer-2 security.</p>
+      </div></div>
+    </div>
+    <div class="learn reveal">
+      <div class="card"><b>CCNA</b><span lang="tr">Ağ temelleri eğitimi</span><span lang="en">Networking training</span><br><span class="st ok">completed</span></div>
+      <div class="card"><b>Blue Team</b><span lang="tr">Savunma eğitimi</span><span lang="en">Defensive training</span><br><span class="st ok">completed</span></div>
+      <div class="card"><b>Pentesting</b><span lang="tr">Sızma testi eğitimi</span><span lang="en">Penetration testing training</span><br><span class="st ok">completed</span></div>
+      <div class="card"><b>THM SOC L1</b><span>TryHackMe path</span><br><span class="st go">in progress</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">05 · work</div>
+      <h2><span lang="tr">Projeler ve yazılar</span><span lang="en">Projects &amp; writing</span></h2>
+    </div>
+    <div class="projects">
+      <a class="proj feat reveal" href="https://github.com/fat1hkaya/soc-home-lab" target="_blank" rel="noopener">
+        <div class="proj-top"><span class="proj-cat">Featured · Blue Team</span><svg class="ext"><use href="#i-ext"/></svg></div>
+        <h3>SOC Home Lab</h3>
+        <p lang="tr">pfSense, Active Directory, Sysmon + Wazuh, Splunk ve Shuffle SOAR ile 7 VM'lik izole lab. Üç saldırı senaryosu özel SPL kurallarıyla tespit ediliyor; saldırgan IP otomatik olarak pfSense'te engelleniyor ve Telegram'a MITRE etiketli bildirim gidiyor.</p>
+        <p lang="en">A 7-VM isolated lab with pfSense, Active Directory, Sysmon + Wazuh, Splunk and Shuffle SOAR. Three attack scenarios are caught by custom SPL rules; the attacker IP is auto-blocked on pfSense and a MITRE-tagged alert is sent to Telegram.</p>
+        <div class="tags"><span class="pill cyan">Splunk</span><span class="pill cyan">Shuffle</span><span class="pill">Wazuh</span><span class="pill">pfSense</span><span class="pill">AD</span><span class="pill">Sysmon</span></div>
+        <span class="go"><span lang="tr">Repoyu aç</span><span lang="en">Open repo</span> →</span>
+      </a>
+      <a class="proj reveal" href="https://github.com/fat1hkaya/soc-home-lab/tree/main/tools/ioc-extractor" target="_blank" rel="noopener">
+        <div class="proj-top"><span class="proj-cat">Threat Intel · Python</span><svg class="ext"><use href="#i-ext"/></svg></div>
+        <h3>IOC Extractor</h3>
+        <p lang="tr">PDF tehdit raporlarından IP, domain ve hash çıkarır; defanged göstergeleri normalleştirir, özel IP'leri eler, bağlama göre güven puanı verir. CSV / JSON çıktı.</p>
+        <p lang="en">Extracts IPs, domains and hashes from PDF threat reports; normalizes defanged indicators, drops private IPs and scores confidence from context. CSV / JSON output.</p>
+        <div class="tags"><span class="pill">Python</span><span class="pill">pdfplumber</span><span class="pill">regex</span></div>
+      </a>
+      <a class="proj reveal" href="https://github.com/fat1hkaya/soc-home-lab/blob/main/docs/Splunk-SPL-Rehberi.pdf" target="_blank" rel="noopener">
+        <div class="proj-top"><span class="proj-cat">Writing · Splunk</span><svg class="ext"><use href="#i-ext"/></svg></div>
+        <h3><span lang="tr">Splunk SPL Rehberi</span><span lang="en">Splunk SPL Guide (TR)</span></h3>
+        <p lang="tr">search'ten tstats, map ve rest'e kadar komutları örnek sorgu, best practice ve sık yapılan hatalarla anlatan 49 sayfalık Türkçe rehber.</p>
+        <p lang="en">A 49-page Turkish guide covering commands from search to tstats, map and rest, with example queries, best practices and common mistakes.</p>
+        <div class="tags"><span class="pill">SPL</span><span class="pill">Splunk 9.2</span><span class="pill">49 pages</span></div>
+      </a>
+      <a class="proj reveal" href="https://github.com/fat1hkaya/BLM2006-Campus-Network" target="_blank" rel="noopener">
+        <div class="proj-top"><span class="proj-cat">Networking · Cisco</span><svg class="ext"><use href="#i-ext"/></svg></div>
+        <h3>Campus Area Network</h3>
+        <p lang="tr">İki kampüs için üç katmanlı ağ: OSPF, HSRP, EtherChannel, VLAN segmentasyonu; Port Security, BPDU Guard, DHCP Snooping ve ACL. Takım projesi; güvenlik ve yönlendirme bölümleri bende.</p>
+        <p lang="en">Three-tier network for two campuses: OSPF, HSRP, EtherChannel, VLANs; Port Security, BPDU Guard, DHCP Snooping and ACLs. Team project; I owned security and routing.</p>
+        <div class="tags"><span class="pill">Packet Tracer</span><span class="pill">IOS</span><span class="pill">CCNA</span></div>
+      </a>
+      <a class="proj reveal" href="https://github.com/fat1hkaya/hastane-yatak-rezervasyonu" target="_blank" rel="noopener">
+        <div class="proj-top"><span class="proj-cat">Software · Java</span><svg class="ext"><use href="#i-ext"/></svg></div>
+        <h3><span lang="tr">Hastane Yatak Rezervasyonu</span><span lang="en">Hospital Bed Reservation</span></h3>
+        <p lang="tr">JavaFX + MySQL, Controller → Service → Repository katmanlı mimari. Takım projesi; veritabanı şeması ve repository katmanı bende.</p>
+        <p lang="en">JavaFX + MySQL with a Controller → Service → Repository architecture. Team project; I owned the database schema and repository layer.</p>
+        <div class="tags"><span class="pill">Java 17</span><span class="pill">JavaFX</span><span class="pill">MySQL</span></div>
+      </a>
+      <a class="proj reveal" href="https://github.com/fat1hkaya/EscapeFromLabyrinth-8086" target="_blank" rel="noopener">
+        <div class="proj-top"><span class="proj-cat">Low-level · Assembly</span><svg class="ext"><use href="#i-ext"/></svg></div>
+        <h3>Escape From Labyrinth</h3>
+        <p lang="tr">8086 Assembly ile VGA Mode 12h'de çalışan labirent oyunu: BIOS/DOS kesmeleri, dosyadan harita yükleme, skor ve zamanlayıcı.</p>
+        <p lang="en">A maze game in 8086 Assembly running in VGA Mode 12h: BIOS/DOS interrupts, map loading from files, score and timer.</p>
+        <div class="tags"><span class="pill">8086</span><span class="pill">INT 10h/21h</span><span class="pill">DOSBox</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- TERMINAL -->
+<section id="terminal" style="background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">06 · interactive</div>
+      <h2><span lang="tr">Benimle terminalden tanış</span><span lang="en">Meet me in the terminal</span></h2>
+      <p lang="tr"><code class="mono">help</code> yazarak başla.</p><p lang="en">Type <code class="mono">help</code> to start.</p>
+    </div>
+    <div class="term reveal">
+      <div class="siem-top"><div class="lights"><i></i><i></i><i></i></div><span>nulltracex@kali: ~</span><span>bash</span></div>
+      <div class="term-body" id="tbody">
+        <div id="tout"></div>
+        <div class="term-line"><span class="prompt">nulltracex@kali<i>:~$</i></span><input id="tin" autocomplete="off" spellcheck="false" aria-label="terminal input"></div>
+      </div>
+    </div>
+    <div class="chips reveal">
+      <span class="chip" data-cmd="whoami">whoami</span><span class="chip" data-cmd="skills">skills</span><span class="chip" data-cmd="lab">lab</span><span class="chip" data-cmd="detections">detections</span><span class="chip" data-cmd="projects">projects</span><span class="chip" data-cmd="contact">contact</span><span class="chip" data-cmd="sudo hire fatih">sudo hire fatih</span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap contact">
+    <div class="contact-main reveal">
+      <div class="eyebrow">07 · contact</div>
+      <h2><span lang="tr">Bir SOC ekibi mi kuruyorsun?</span><span lang="en">Building a SOC team?</span></h2>
+      <p lang="tr">Staj, junior SOC analisti ve blue team pozisyonları için konuşmaya açığım. En hızlı yanıtı e-posta veya LinkedIn üzerinden veririm.</p>
+      <p lang="en">I'm open to internships, junior SOC analyst and blue team roles. The fastest way to reach me is e-mail or LinkedIn.</p>
+      <div class="cta">
+        <a class="btn primary mailto" href="#contact"><svg><use href="#i-mail"/></svg><span lang="tr">E-posta gönder</span><span lang="en">Send an e-mail</span></a>
+        <button class="btn" id="copyMail"><span lang="tr">Adresi kopyala</span><span lang="en">Copy address</span></button>
+      </div>
+    </div>
+    <div class="links reveal">
+      <a class="lnk mailto" href="#contact"><svg><use href="#i-mail"/></svg><div><b>E-mail</b><span id="mailText">fatihkaya125004 [at] gmail</span></div><span class="arrow">→</span></a>
+      <a class="lnk" href="https://www.linkedin.com/in/fatihsec" target="_blank" rel="noopener"><svg><use href="#i-in"/></svg><div><b>LinkedIn</b><span>in/fatihsec</span></div><span class="arrow">→</span></a>
+      <a class="lnk" href="https://github.com/fat1hkaya" target="_blank" rel="noopener"><svg><use href="#i-gh"/></svg><div><b>GitHub</b><span>fat1hkaya</span></div><span class="arrow">→</span></a>
+      <a class="lnk" href="https://tryhackme.com/p/NullTraceX" target="_blank" rel="noopener"><svg><use href="#i-flag"/></svg><div><b>TryHackMe</b><span>NullTraceX</span></div><span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="yr"></span> Fatih Kaya · İstanbul</span>
+    <span><span lang="tr">Saf HTML/CSS/JS · GitHub Pages</span><span lang="en">Pure HTML/CSS/JS · GitHub Pages</span></span>
+  </div>
+</footer>
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+'use strict';
+/* ---------- config ---------- */
+var CV_URL = ''; // e.g. 'cv/Fatih_Kaya_CV.pdf' — leave empty to hide the CV button
+var MAIL = ['fatihkaya125004','gmail.com'].join('@');
+var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var $ = function(s,c){return (c||document).querySelector(s)};
+var $$ = function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s))};
+
+/* ---------- language ---------- */
+var LANG = 'tr';
+function setLang(l){
+  LANG = l; document.documentElement.setAttribute('data-lang', l); document.documentElement.lang = l;
+  $$('.lang button').forEach(function(b){b.classList.toggle('on', b.dataset.l===l)});
+  try{localStorage.setItem('lang', l)}catch(e){}
+  restartTyping(); renderInfo(curNode);
+}
+$$('.lang button').forEach(function(b){b.addEventListener('click',function(){setLang(b.dataset.l)})});
+var saved=null; try{saved=localStorage.getItem('lang')}catch(e){}
+var initial = saved || ((navigator.language||'tr').toLowerCase().indexOf('tr')===0 ? 'tr' : 'en');
+
+/* ---------- nav ---------- */
+var nav=$('#nav');
+window.addEventListener('scroll',function(){nav.classList.toggle('scrolled', scrollY>10)},{passive:true});
+$('#burger').addEventListener('click',function(){$('#navlinks').classList.toggle('open')});
+$$('#navlinks a').forEach(function(a){a.addEventListener('click',function(){$('#navlinks').classList.remove('open')})});
+var secs=$$('section[id]');
+var so=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){$$('#navlinks a').forEach(function(a){a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id)})}})},{rootMargin:'-45% 0px -50% 0px'});
+secs.forEach(function(s){so.observe(s)});
+
+/* ---------- mail / cv ---------- */
+$$('.mailto').forEach(function(a){a.setAttribute('href','mailto:'+MAIL)});
+$('#mailText').textContent = MAIL;
+function toast(t){var el=$('#toast');el.textContent=t;el.classList.add('show');clearTimeout(el._t);el._t=setTimeout(function(){el.classList.remove('show')},2200)}
+$('#copyMail').addEventListener('click',function(){
+  var done=function(){toast(LANG==='tr'?'E-posta kopyalandı':'E-mail copied')};
+  if(navigator.clipboard){navigator.clipboard.writeText(MAIL).then(done,function(){prompt('',MAIL)})}else{prompt('',MAIL)}
+});
+if(CV_URL){var cb=$('#cvBtn');cb.href=CV_URL;cb.classList.remove('hidden')}
+$('#yr').textContent = new Date().getFullYear();
+
+/* ---------- typing ---------- */
+var roles = {
+  tr:['SOC Analyst adayı','Detection Engineering','Splunk · Wazuh · Shuffle','Blue Team'],
+  en:['Aspiring SOC Analyst','Detection Engineering','Splunk · Wazuh · Shuffle','Blue Team']
+};
+var tEl=$('#typed'), tTimer=null;
+function restartTyping(){
+  clearTimeout(tTimer); var list=roles[LANG], i=0, j=0, del=false;
+  if(reduce){tEl.textContent=list[0];return}
+  (function tick(){
+    var w=list[i]; tEl.textContent=w.slice(0,j);
+    if(!del&&j<w.length){j++;tTimer=setTimeout(tick,70)}
+    else if(!del){del=true;tTimer=setTimeout(tick,1700)}
+    else if(j>0){j--;tTimer=setTimeout(tick,35)}
+    else{del=false;i=(i+1)%list.length;tTimer=setTimeout(tick,300)}
+  })();
+}
+
+/* ---------- live SIEM feed ---------- */
+var tpl = [
+  ['info','sysmon','EID 22 DNS query · WIN11-CLIENT → update.microsoft.com'],
+  ['info','wineventlog','EID 4624 logon type 3 · SOC\\fatih from 192.168.10.20'],
+  ['low','pfsense','pass  TCP 192.168.10.20:51344 → 192.168.20.20:9997'],
+  ['info','wazuh','rule 60106 · Windows logon success · SOC-DC'],
+  ['low','nginx','GET /rest/products/search?q=apple 200 · 192.168.10.20'],
+  ['med','wineventlog','EID 4625 failed logon · Administrator from 192.168.32.185'],
+  ['info','sysmon','EID 3 network conn · svchost.exe → 192.168.10.10:88'],
+  ['med','wazuh','rule 550 · FIM: integrity checksum changed C:\\Lab\\test.conf'],
+  ['low','pfsense','block UDP 192.168.32.185:5353 → 224.0.0.251 (bogon)'],
+  ['high','splunk','ALERT JuiceShop - Aggressive Directory Scanning · dc(uri)=1034'],
+  ['high','shuffle','PATCH pfSense SOC-Auto-Block → 192.168.32.185 · telegram sent'],
+  ['info','wineventlog','EID 4769 TGS request · svc_sql · enc 0x12'],
+  ['med','sysmon','EID 10 process access · target lsass.exe'],
+  ['high','splunk','ALERT JuiceShop - SQL Injection Login Attempt · OR 1=1'],
+  ['high','splunk','ALERT Brute Force · Administrator · 78 x 4625 in 5m'],
+  ['info','wineventlog','EID 4104 PowerShell script block logged · WIN11-CLIENT']
+];
+var feed=$('#feed'), kEv=0, kAl=0, kBl=0, pts=[];
+for(var p=0;p<40;p++)pts.push(8+Math.random()*10);
+function pad(n){return (n<10?'0':'')+n}
+function drawSpark(){
+  var max=Math.max.apply(null,pts)+4, d='', f='';
+  pts.forEach(function(v,i){var x=i*(300/(pts.length-1)), y=36-(v/max)*34; d+=(i?'L':'M')+x.toFixed(1)+' '+y.toFixed(1)});
+  f=d+' L300 36 L0 36 Z';
+  $('#sparkPath').setAttribute('d',d); $('#sparkFill').setAttribute('d',f);
+}
+function addEvent(){
+  var r=Math.random(), e;
+  if(r<.08) e=tpl[9+Math.floor(Math.random()*2)*4%6]; else e=tpl[Math.floor(Math.random()*tpl.length)];
+  var now=new Date(), row=document.createElement('div');
+  row.className='ev';
+  row.innerHTML='<span class="t">'+pad(now.getHours())+':'+pad(now.getMinutes())+':'+pad(now.getSeconds())+'</span><span class="sev lv-'+e[0]+'">'+e[0].toUpperCase()+'</span><span><span class="c-dim">'+e[1]+'</span> '+e[2].replace(/</g,'&lt;')+'</span>';
+  feed.insertBefore(row,feed.firstChild);
+  while(feed.children.length>14)feed.removeChild(feed.lastChild);
+  kEv+=Math.floor(3+Math.random()*9); if(e[0]==='high'){kAl++; if(e[1]==='shuffle')kBl++;}
+  $('#kEv').textContent=kEv.toLocaleString('en'); $('#kAl').textContent=kAl; $('#kBl').textContent=kBl;
+  pts.push(e[0]==='high'?22+Math.random()*6:6+Math.random()*12); pts.shift(); drawSpark();
+}
+kEv=18240; kAl=11; kBl=4;
+for(var q=0;q<10;q++)addEvent();
+if(!reduce) setInterval(addEvent,1300);
+
+/* ---------- reveal & counters ---------- */
+var ro=new IntersectionObserver(function(es){es.forEach(function(e){
+  if(!e.isIntersecting)return; e.target.classList.add('in'); ro.unobserve(e.target);
+  $$('[data-count]',e.target).forEach(countUp);
+  $$('.fill',e.target).forEach(function(f){f.style.width=f.dataset.w+'%'});
+})},{threshold:.15});
+$$('.reveal').forEach(function(el){ro.observe(el)});
+function countUp(el){
+  var to=+el.dataset.count, t0=null;
+  if(reduce){el.textContent=to;return}
+  (function step(ts){if(!t0)t0=ts;var k=Math.min((ts-t0)/1200,1);el.textContent=Math.round(to*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(step)})(performance.now());
+}
+
+/* ---------- project spotlight ---------- */
+$$('.proj').forEach(function(c){c.addEventListener('mousemove',function(e){var r=c.getBoundingClientRect();c.style.setProperty('--mx',(e.clientX-r.left)+'px');c.style.setProperty('--my',(e.clientY-r.top)+'px')})});
+
+/* ---------- topology info ---------- */
+var NODES={
+  kali:{t:'Kali Linux',ip:'192.168.32.185 · WAN',tr:'Saldırgan makine. pfSense\'in WAN tarafında konumlandırıldı; böylece saldırılar gerçekçi şekilde "dışarıdan" geliyor.',en:'Attacker box, placed on the pfSense WAN side so attacks realistically come from "outside".',li:['gobuster · dirb/common.txt','curl · SQLi payload','Hydra · RDP brute force','Nmap · Burp Suite']},
+  pf:{t:'pfSense 2.8.1',ip:'WAN · LAN .10.1 · OPT1 .20.1',tr:'Segmentasyon, NAT ve en az ayrıcalık kuralları. Filtre logları UDP 514 ile Splunk\'a gider; Shuffle en üstteki SOC-Auto-Block kuralını REST API ile günceller.',en:'Segmentation, NAT and least-privilege rules. Filter logs go to Splunk over UDP 514; Shuffle updates the top SOC-Auto-Block rule via REST API.',li:['First-match rule ordering','Remote syslog → Splunk','REST API PATCH auto-block','Suricata package']},
+  dc:{t:'AD Domain Controller',ip:'192.168.10.10 · soc.local',tr:'Windows Server 2022: AD DS, DNS, AD CS. Kasıtlı zafiyetler: SPN\'li zayıf servis hesabı (Kerberoasting), ön kimlik doğrulaması kapalı hesap (AS-REP Roasting), hatalı sertifika şablonu.',en:'Windows Server 2022 with AD DS, DNS, AD CS. Deliberate weaknesses: weak SPN service account (Kerberoasting), pre-auth disabled account (AS-REP Roasting), misconfigured cert template.',li:['GPO: 4624/4625, 4688, 4104','Sysmon (SwiftOnSecurity base)','Wazuh Agent + Splunk UF','DNS query logging']},
+  w11:{t:'Windows 11',ip:'192.168.10.20',tr:'Domain\'e dahil, düşük yetkili standart kullanıcı. Sysmon, Wazuh Agent ve Splunk UF ile çift kanaldan telemetri.',en:'Domain-joined, low-privilege standard user. Dual-channel telemetry via Sysmon, Wazuh Agent and Splunk UF.',li:['Sysmon EID 3 · 10 · 22','Wazuh FIM','Universal Forwarder']},
+  ng:{t:'Nginx reverse proxy',ip:'192.168.20.30',tr:'Uygulamanın iç adresini gizler ve tüm istekleri tek noktadan loglar. Özel log_format ile POST gövdesi de kaydediliyor; SQLi hem proxy hem uygulama katmanında görünür.',en:'Hides the app\'s internal address and logs every request at one point. A custom log_format also records the POST body, so SQLi is visible at both proxy and app layers.',li:['log_format + $request_body','access / error → Splunk']},
+  js:{t:'OWASP Juice Shop',ip:'192.168.20.30:8080 · Docker',tr:'Kasıtlı zafiyetli e-ticaret uygulaması. Dizin taraması, login SQL Injection ve yansıyan XSS senaryolarının hedefi.',en:'Intentionally vulnerable e-commerce app. Target for directory scanning, login SQL injection and reflected XSS.',li:['SPA: 200 for unknown URLs','App logs → Splunk']},
+  wz:{t:'Wazuh 4.8',ip:'192.168.20.10 · single node',tr:'Manager, Indexer ve Dashboard tek düğümde. Ajanlar TCP 1514 üzerinden şifreli bağlanıyor; JSON alarmlar UF ile Splunk\'a aktarılıyor.',en:'Manager, Indexer and Dashboard on a single node. Agents connect encrypted over TCP 1514; JSON alerts are shipped to Splunk via UF.',li:['File Integrity Monitoring','Silent agent install (PowerShell)','props.conf parsing in Splunk']},
+  sp:{t:'Splunk Enterprise 9.2.1',ip:'192.168.20.20',tr:'Tüm kaynakların birleştiği merkezi SIEM. Her case study zamanlanmış bir arama + "For each result" tetiklemeli webhook alarmı.',en:'Central SIEM where every source converges. Each case study is a scheduled search with a "For each result" webhook alert.',li:['index: wineventlog · sysmon · juiceshop','dc(), rex, regex, bin, stats','Webhook → Shuffle']},
+  sh:{t:'Shuffle SOAR',ip:'192.168.20.30 · Docker Compose',tr:'Tek merkezi workflow: Webhook → Python ayrıştırıcı (IP doğrulama, MITRE etiketi, should_block) → Telegram + pfSense. API anahtarları şifreli kimlik bilgisi deposunda.',en:'One central workflow: Webhook → Python parser (IP validation, MITRE tag, should_block) → Telegram + pfSense. API keys live in the encrypted credential store.',li:['Retry + exponential backoff','IP lookup cache','Orborus isolated execution']},
+  tg:{t:'Telegram · Soc_Alert_Bot',ip:'Bot API',tr:'Analiste (bana) alarm adı, kaynak IP, payload ve MITRE tekniğini içeren anlık bildirim.',en:'Instant alert to the analyst (me) with alert name, source IP, payload and MITRE technique.',li:['🔴 / 🟠 severity','Auto-block confirmation']}
+};
+var curNode='sp';
+function renderInfo(k){
+  curNode=k; var n=NODES[k];
+  $$('.node').forEach(function(g){g.classList.toggle('sel',g.dataset.n===k)});
+  $('#info').innerHTML='<span class="eyebrow" style="margin:0">'+(LANG==='tr'?'bileşen':'component')+'</span><h3>'+n.t+'</h3><div class="ip">'+n.ip+'</div><p>'+n[LANG]+'</p><ul>'+n.li.map(function(x){return '<li>'+x+'</li>'}).join('')+'</ul><p class="mono" style="font-size:11.5px;color:var(--dim);margin-top:auto;padding-top:14px">'+(LANG==='tr'?'↖ diyagramdaki herhangi bir bileşene tıkla':'↖ click any component in the diagram')+'</p>';
+}
+$$('.node').forEach(function(g){g.addEventListener('click',function(){renderInfo(g.dataset.n)})});
+
+/* ---------- attack replay ---------- */
+var running=false;
+var SEQ=[
+  {s:0,path:'f-kali-pf',cls:'atk',n:'kali',log:{tr:'<span class="c-red">[kali]</span> gobuster dir -u http://192.168.20.30:8080 ...',en:'<span class="c-red">[kali]</span> gobuster dir -u http://192.168.20.30:8080 ...'}},
+  {s:0,path:'f-pf-ng',cls:'atk',n:'pf'},
+  {s:0,path:'f-ng-js',cls:'atk',n:'js',log:{tr:'<span class="c-dim">[juiceshop]</span> 1034 farklı URI, 10 saniye',en:'<span class="c-dim">[juiceshop]</span> 1034 unique URIs in 10 seconds'}},
+  {s:1,path:'f-js-sp',cls:'hot',n:'sp',log:{tr:'<span class="c-blue">[nginx→splunk]</span> access_combined olayları indekslendi',en:'<span class="c-blue">[nginx→splunk]</span> access_combined events indexed'}},
+  {s:2,n:'sp',log:{tr:'<span class="c-amber">[splunk]</span> ALERT: JuiceShop - Aggressive Directory Scanning Detected',en:'<span class="c-amber">[splunk]</span> ALERT: JuiceShop - Aggressive Directory Scanning Detected'}},
+  {s:3,path:'f-sp-sh',cls:'hot',n:'sh',log:{tr:'<span class="c-violet">[shuffle]</span> webhook alındı → mitre=T1595.003 should_block=true',en:'<span class="c-violet">[shuffle]</span> webhook received → mitre=T1595.003 should_block=true'}},
+  {s:3,path:'f-sh-pf',cls:'hot',n:'pf',log:{tr:'<span class="c-violet">[shuffle]</span> PATCH firewall rule "SOC-Auto-Block" src=192.168.32.185',en:'<span class="c-violet">[shuffle]</span> PATCH firewall rule "SOC-Auto-Block" src=192.168.32.185'}},
+  {s:4,path:'f-sh-tg',cls:'hot',n:'tg',log:{tr:'<span class="c-cyan">[telegram]</span> 🔴 SOC ALERT gönderildi · kaynak engellendi',en:'<span class="c-cyan">[telegram]</span> 🔴 SOC ALERT sent · source blocked'}},
+  {s:5,n:'kali',log:{tr:'<span class="c-green">[pfsense]</span> block 192.168.32.185 → * · zincir manuel müdahalesiz kapandı ✓',en:'<span class="c-green">[pfsense]</span> block 192.168.32.185 → * · chain closed with zero manual steps ✓'}}
+];
+function logLine(h){var d=document.createElement('div');d.className='l';var t=new Date();d.innerHTML='<span class="c-dim">'+pad(t.getHours())+':'+pad(t.getMinutes())+':'+pad(t.getSeconds())+'</span> '+h;$('#rlog').appendChild(d);$('#rlog').scrollTop=1e6}
+function movePkt(id,cls){
+  return new Promise(function(res){
+    var path=document.getElementById(id), pkt=$('#pkt');
+    path.classList.add(cls); pkt.setAttribute('fill', cls==='atk'?'#ff5d6c':'#34e3c9');
+    if(reduce){res();return}
+    var L=path.getTotalLength(), t0=null, dur=Math.max(420,L*3.2); pkt.style.opacity=1;
+    (function step(ts){if(!t0)t0=ts;var k=Math.min((ts-t0)/dur,1),pt=path.getPointAtLength(L*k);pkt.setAttribute('cx',pt.x);pkt.setAttribute('cy',pt.y);if(k<1)requestAnimationFrame(step);else{pkt.style.opacity=0;res()}})(performance.now());
+  });
+}
+function wait(ms){return new Promise(function(r){setTimeout(r,reduce?0:ms)})}
+$('#replayBtn').addEventListener('click',function(){
+  if(running)return; running=true;
+  $$('.flow').forEach(function(f){f.classList.remove('hot','atk')});
+  $$('.step').forEach(function(s){s.classList.remove('on','done')});
+  $('#rlog').innerHTML='';
+  var chain=Promise.resolve();
+  SEQ.forEach(function(st){
+    chain=chain.then(function(){
+      $$('.step').forEach(function(s){var i=+s.dataset.s;s.classList.toggle('on',i===st.s);if(i<st.s)s.classList.add('done')});
+      if(st.n)renderInfo(st.n);
+      if(st.log)logLine(st.log[LANG]);
+      return st.path?movePkt(st.path,st.cls):wait(700);
+    }).then(function(){return wait(250)});
+  });
+  chain.then(function(){$$('.step').forEach(function(s){s.classList.remove('on');s.classList.add('done')});running=false});
+});
+
+/* ---------- case tabs ---------- */
+$$('.tab').forEach(function(t){t.addEventListener('click',function(){
+  $$('.tab').forEach(function(x){x.classList.toggle('on',x===t)});
+  $$('.case').forEach(function(c){c.classList.toggle('on',c.id===t.dataset.c)});
+})});
+
+/* ---------- terminal ---------- */
+var tout=$('#tout'), tin=$('#tin'), tbody=$('#tbody'), hist=[], hi=0;
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;')}
+function print(h){var d=document.createElement('div');d.className='out';d.innerHTML=h;tout.appendChild(d);tbody.scrollTop=1e6}
+var T={
+  help:{tr:'Komutlar:\n  <span class="c-cyan">whoami</span>      kısa tanıtım\n  <span class="c-cyan">skills</span>      teknik yetkinlikler\n  <span class="c-cyan">lab</span>         SOC Home Lab özeti\n  <span class="c-cyan">detections</span>  SPL tespitleri\n  <span class="c-cyan">projects</span>    projeler\n  <span class="c-cyan">experience</span>  deneyim\n  <span class="c-cyan">contact</span>     iletişim\n  <span class="c-cyan">lang en</span>     dili değiştir\n  <span class="c-cyan">clear</span>       ekranı temizle',
+        en:'Commands:\n  <span class="c-cyan">whoami</span>      short intro\n  <span class="c-cyan">skills</span>      technical skills\n  <span class="c-cyan">lab</span>         SOC Home Lab summary\n  <span class="c-cyan">detections</span>  SPL detections\n  <span class="c-cyan">projects</span>    projects\n  <span class="c-cyan">experience</span>  experience\n  <span class="c-cyan">contact</span>     contact\n  <span class="c-cyan">lang tr</span>     switch language\n  <span class="c-cyan">clear</span>       clear screen'},
+  whoami:{tr:'<span class="c-green">Fatih Kaya</span> · Bilgisayar Mühendisliği @ Marmara Üniversitesi\nEx-SOC intern · Detection & Response · İstanbul\nLogdan tespite, tespitten otomatik müdahaleye.',
+          en:'<span class="c-green">Fatih Kaya</span> · Computer Engineering @ Marmara University\nEx-SOC intern · Detection & Response · Istanbul\nFrom log to detection, from detection to automated response.'},
+  skills:{tr:'SIEM      : Splunk (SPL), Wazuh\nEndpoint  : Sysmon, Windows Event Logs, Linux auth logs\nSOAR      : Shuffle, Python, REST API, webhooks\nNetwork   : pfSense, CCNA, segmentation, NAT\nIdentity  : Active Directory, Kerberos, GPO audit policy\nLanguages : Python, C, Java, 8086 Assembly',
+          en:'SIEM      : Splunk (SPL), Wazuh\nEndpoint  : Sysmon, Windows Event Logs, Linux auth logs\nSOAR      : Shuffle, Python, REST API, webhooks\nNetwork   : pfSense, CCNA, segmentation, NAT\nIdentity  : Active Directory, Kerberos, GPO audit policy\nLanguages : Python, C, Java, 8086 Assembly'},
+  lab:{tr:'SOC Home Lab · 7 VM · VMware Workstation\n  LAN  192.168.10.0/24  AD DC, Windows 11\n  DMZ  192.168.20.0/24  Wazuh, Splunk, Shuffle, Nginx + Juice Shop\n  WAN                   Kali (192.168.32.185)\nZincir: saldırı → Splunk alarmı → Shuffle → pfSense block → Telegram\n<span class="c-blue">github.com/fat1hkaya/soc-home-lab</span>',
+       en:'SOC Home Lab · 7 VMs · VMware Workstation\n  LAN  192.168.10.0/24  AD DC, Windows 11\n  DMZ  192.168.20.0/24  Wazuh, Splunk, Shuffle, Nginx + Juice Shop\n  WAN                   Kali (192.168.32.185)\nChain: attack → Splunk alert → Shuffle → pfSense block → Telegram\n<span class="c-blue">github.com/fat1hkaya/soc-home-lab</span>'},
+  detections:{tr:'[T1595.003] Directory Scanning  dc(uri) > 8 / 10s        <span class="c-green">AUTO-BLOCK</span>\n[T1190]     SQL Injection       POST body regex         <span class="c-green">AUTO-BLOCK</span>\n[T1110]     RDP Brute Force     >5 x 4625 / 5m + 4624   <span class="c-green">AUTO-BLOCK</span>',
+              en:'[T1595.003] Directory Scanning  dc(uri) > 8 / 10s        <span class="c-green">AUTO-BLOCK</span>\n[T1190]     SQL Injection       POST body regex         <span class="c-green">AUTO-BLOCK</span>\n[T1110]     RDP Brute Force     >5 x 4625 / 5m + 4624   <span class="c-green">AUTO-BLOCK</span>'},
+  projects:{tr:'1. soc-home-lab           Splunk + Wazuh + Shuffle SOAR lab\n2. ioc-extractor          PDF raporlardan IOC çıkarma (Python)\n3. Splunk SPL Rehberi     49 sayfa, Türkçe\n4. BLM2006-Campus-Network OSPF, HSRP, L2 güvenlik\n5. hastane-yatak-rez.     JavaFX + MySQL\n6. EscapeFromLabyrinth    8086 Assembly, VGA',
+            en:'1. soc-home-lab           Splunk + Wazuh + Shuffle SOAR lab\n2. ioc-extractor          IOC extraction from PDF reports (Python)\n3. Splunk SPL Guide       49 pages, Turkish\n4. BLM2006-Campus-Network OSPF, HSRP, L2 security\n5. hospital-bed-res.      JavaFX + MySQL\n6. EscapeFromLabyrinth    8086 Assembly, VGA'},
+  experience:{tr:'2026      TryHackMe SOC L1 · CyberCarier Wazuh Blue Team (devam)\n07–08.26  SOC Stajyeri · VakıfBank Güvenlik Operasyon Merkezi\n—         Bilgisayar Mühendisliği · Marmara Üniversitesi',
+              en:'2026      TryHackMe SOC L1 · CyberCarier Wazuh Blue Team (ongoing)\n07–08.26  SOC Intern · VakıfBank Security Operations Center\n—         B.Sc. Computer Engineering · Marmara University'},
+  contact:{tr:function(){return 'e-posta   : <span class="c-cyan">'+MAIL+'</span>\nlinkedin  : in/fatihsec\ngithub    : fat1hkaya\ntryhackme : NullTraceX'}, en:function(){return 'email     : <span class="c-cyan">'+MAIL+'</span>\nlinkedin  : in/fatihsec\ngithub    : fat1hkaya\ntryhackme : NullTraceX'}}
+};
+function run(raw){
+  var c=raw.trim(); print('<span class="prompt">nulltracex@kali<i>:~$</i></span> '+esc(c));
+  if(!c)return; hist.push(c); hi=hist.length;
+  var lc=c.toLowerCase();
+  if(lc==='clear'){tout.innerHTML='';return}
+  if(lc==='lang tr'||lc==='lang en'){setLang(lc.slice(5));print(lc==='lang tr'?'Dil: Türkçe':'Language: English');return}
+  if(lc.indexOf('sudo hire')===0){
+    print(LANG==='tr'?'[sudo] password for recruiter: ********\n<span class="c-green">✓ yetki verildi.</span> E-posta istemcisi açılıyor...':'[sudo] password for recruiter: ********\n<span class="c-green">✓ access granted.</span> Opening mail client...');
+    setTimeout(function(){location.href='mailto:'+MAIL+'?subject='+encodeURIComponent('Hello Fatih')},900);return;
+  }
+  if(lc==='ls'){print('about.txt  soc-home-lab/  detections/  projects/  contact.txt');return}
+  if(lc.indexOf('cat ')===0){var m={'about.txt':'whoami','contact.txt':'contact'}[lc.slice(4)];if(m){lc=m}else{print('cat: '+esc(c.slice(4))+': No such file or directory');return}}
+  if(lc==='rm -rf /'||lc==='sudo rm -rf /'){print('<span class="c-red">nice try.</span> Wazuh FIM alert raised 🙂');return}
+  var cmd=T[lc];
+  if(!cmd){print((LANG==='tr'?'komut bulunamadı: ':'command not found: ')+esc(c)+(LANG==='tr'?' · <span class="c-cyan">help</span> yaz':' · type <span class="c-cyan">help</span>'));return}
+  var o=cmd[LANG]; print(typeof o==='function'?o():o);
+}
+tin.addEventListener('keydown',function(e){
+  if(e.key==='Enter'){run(tin.value);tin.value=''}
+  else if(e.key==='ArrowUp'){if(hi>0){hi--;tin.value=hist[hi]}e.preventDefault()}
+  else if(e.key==='ArrowDown'){if(hi<hist.length-1){hi++;tin.value=hist[hi]}else{hi=hist.length;tin.value=''}e.preventDefault()}
+  else if(e.key==='Tab'){e.preventDefault();var v=tin.value.toLowerCase(),k=Object.keys(T).concat(['clear','lang en','lang tr']).filter(function(x){return x.indexOf(v)===0});if(k.length===1)tin.value=k[0]}
+});
+tbody.addEventListener('click',function(){if(!getSelection().toString())tin.focus({preventScroll:true})});
+$$('.chip').forEach(function(ch){ch.addEventListener('click',function(){run(ch.dataset.cmd);tin.focus({preventScroll:true})})});
+
+/* ---------- init ---------- */
+setLang(initial);
+print(LANG==='tr'?'<span class="c-dim">Fatih Kaya portfolio shell v1.0 · </span><span class="c-cyan">help</span><span class="c-dim"> yazarak başla</span>':'<span class="c-dim">Fatih Kaya portfolio shell v1.0 · type </span><span class="c-cyan">help</span><span class="c-dim"> to start</span>');
+})();
+</script>
+</body>
+</html>
