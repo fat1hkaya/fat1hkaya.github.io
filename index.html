@@ -682,6 +682,20 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
         <p lang="en">Extracts IPs, domains and hashes from PDF threat reports; normalizes defanged indicators, drops private IPs and scores confidence from context. CSV / JSON output.</p>
         <div class="tags"><span class="pill">Python</span><span class="pill">pdfplumber</span><span class="pill">regex</span></div>
       </a>
+      <a class="proj reveal" href="https://github.com/fat1hkaya/phishlens" target="_blank" rel="noopener">
+        <div class="proj-top"><span class="proj-cat">Email Security · Python</span><svg class="ext"><use href="#i-ext"/></svg></div>
+        <h3>PhishLens</h3>
+        <p lang="tr">Şüpheli .eml dosyaları için SOC triage aracı: SPF/DKIM/DMARC, benzer domainler, URL ve ek analizi, tehdit istihbaratı zenginleştirme; 0–100 risk puanı, defanged IOC'ler ve MITRE ATT&amp;CK eşlemeli rapor. CLI, web arayüzü ve API.</p>
+        <p lang="en">SOC triage tool for suspicious .eml files: SPF/DKIM/DMARC, lookalike domains, URL and attachment heuristics, threat-intel enrichment; 0–100 risk score, defanged IOCs and a MITRE ATT&amp;CK-mapped report. CLI, web UI and API.</p>
+        <div class="tags"><span class="pill cyan">Python</span><span class="pill">Flask</span><span class="pill">Docker</span><span class="pill">pytest</span><span class="pill">CI</span></div>
+      </a>
+      <a class="proj reveal" href="https://github.com/fat1hkaya/saldirilar-ve-tespit" target="_blank" rel="noopener">
+        <div class="proj-top"><span class="proj-cat">Writing · Detection</span><svg class="ext"><use href="#i-ext"/></svg></div>
+        <h3><span lang="tr">Saldırılar ve Tespit</span><span lang="en">Attacks &amp; Detection (TR)</span></h3>
+        <p lang="tr">Kurumsal SOC için en önemli 100 saldırı: nasıl çalışır, Splunk SPL ve Wazuh ile nasıl tespit edilir, nasıl önlenir. Türkçe seri, devam ediyor.</p>
+        <p lang="en">The top 100 attacks for an enterprise SOC: how each works, how to detect it with Splunk SPL and Wazuh, and how to prevent it. Turkish series, in progress.</p>
+        <div class="tags"><span class="pill">SPL</span><span class="pill">Wazuh</span><span class="pill">MITRE ATT&amp;CK</span></div>
+      </a>
       <a class="proj reveal" href="https://github.com/fat1hkaya/soc-home-lab/blob/main/docs/Splunk-SPL-Rehberi.pdf" target="_blank" rel="noopener">
         <div class="proj-top"><span class="proj-cat">Writing · Splunk</span><svg class="ext"><use href="#i-ext"/></svg></div>
         <h3><span lang="tr">Splunk SPL Rehberi</span><span lang="en">Splunk SPL Guide (TR)</span></h3>
@@ -968,8 +982,8 @@ var T={
        en:'SOC Home Lab · 7 VMs · VMware Workstation\n  LAN  192.168.10.0/24  AD DC, Windows 11\n  DMZ  192.168.20.0/24  Wazuh, Splunk, Shuffle, Nginx + Juice Shop\n  WAN                   Kali (192.168.32.185)\nChain: attack → Splunk alert → Shuffle → pfSense block → Telegram\n<span class="c-blue">github.com/fat1hkaya/soc-home-lab</span>'},
   detections:{tr:'[T1595.003] Directory Scanning  dc(uri) > 8 / 10s        <span class="c-green">AUTO-BLOCK</span>\n[T1190]     SQL Injection       POST body regex         <span class="c-green">AUTO-BLOCK</span>\n[T1110]     RDP Brute Force     >5 x 4625 / 5m + 4624   <span class="c-green">AUTO-BLOCK</span>',
               en:'[T1595.003] Directory Scanning  dc(uri) > 8 / 10s        <span class="c-green">AUTO-BLOCK</span>\n[T1190]     SQL Injection       POST body regex         <span class="c-green">AUTO-BLOCK</span>\n[T1110]     RDP Brute Force     >5 x 4625 / 5m + 4624   <span class="c-green">AUTO-BLOCK</span>'},
-  projects:{tr:'1. soc-home-lab           Splunk + Wazuh + Shuffle SOAR lab\n2. ioc-extractor          PDF raporlardan IOC çıkarma (Python)\n3. Splunk SPL Rehberi     49 sayfa, Türkçe\n4. BLM2006-Campus-Network OSPF, HSRP, L2 güvenlik\n5. hastane-yatak-rez.     JavaFX + MySQL\n6. EscapeFromLabyrinth    8086 Assembly, VGA',
-            en:'1. soc-home-lab           Splunk + Wazuh + Shuffle SOAR lab\n2. ioc-extractor          IOC extraction from PDF reports (Python)\n3. Splunk SPL Guide       49 pages, Turkish\n4. BLM2006-Campus-Network OSPF, HSRP, L2 security\n5. hospital-bed-res.      JavaFX + MySQL\n6. EscapeFromLabyrinth    8086 Assembly, VGA'},
+  projects:{tr:'1. soc-home-lab           Splunk + Wazuh + Shuffle SOAR lab\n2. phishlens              .eml phishing analizi (Python, Flask)\n3. saldirilar-ve-tespit   100 saldırı + SPL/Wazuh tespit (TR)\n4. ioc-extractor          PDF raporlardan IOC çıkarma (Python)\n5. Splunk SPL Rehberi     49 sayfa, Türkçe\n6. BLM2006-Campus-Network OSPF, HSRP, L2 güvenlik\n7. hastane-yatak-rez.     JavaFX + MySQL\n8. EscapeFromLabyrinth    8086 Assembly, VGA',
+            en:'1. soc-home-lab           Splunk + Wazuh + Shuffle SOAR lab\n2. phishlens              .eml phishing triage (Python, Flask)\n3. saldirilar-ve-tespit   100 attacks + SPL/Wazuh detection (TR)\n4. ioc-extractor          IOC extraction from PDF reports (Python)\n5. Splunk SPL Guide       49 pages, Turkish\n6. BLM2006-Campus-Network OSPF, HSRP, L2 security\n7. hospital-bed-res.      JavaFX + MySQL\n8. EscapeFromLabyrinth    8086 Assembly, VGA'},
   experience:{tr:'2026      TryHackMe SOC L1 · CyberCarier Wazuh Blue Team (devam)\n07–08.26  SOC Stajyeri · VakıfBank Güvenlik Operasyon Merkezi\n—         Bilgisayar Mühendisliği · Marmara Üniversitesi',
               en:'2026      TryHackMe SOC L1 · CyberCarier Wazuh Blue Team (ongoing)\n07–08.26  SOC Intern · VakıfBank Security Operations Center\n—         B.Sc. Computer Engineering · Marmara University'},
   contact:{tr:function(){return 'e-posta   : <span class="c-cyan">'+MAIL+'</span>\nlinkedin  : in/fatihsec\ngithub    : fat1hkaya\ntryhackme : NullTraceX'}, en:function(){return 'email     : <span class="c-cyan">'+MAIL+'</span>\nlinkedin  : in/fatihsec\ngithub    : fat1hkaya\ntryhackme : NullTraceX'}}
